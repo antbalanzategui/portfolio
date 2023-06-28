@@ -1,0 +1,112 @@
+@import './fonts.css';
+
+.sectionContainer {
+    padding-bottom: 200px;
+    overflow: hidden;
+    padding-top: max(60px, 3vw);
+    
+}
+
+.projectSection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25vw, 2fr));
+    grid-gap: 50px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    overflow-y: hidden;
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
+  .header {
+    font-family: 'Inconsolata';
+    text-align: center;
+    font-size: clamp(60px, 15vw, 75px);
+    margin-bottom: 20px;
+    color: rgb(127, 0, 255);
+    text-shadow:
+      0 0 0 transparent,
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255),
+      0 0 1vw rgb(207, 159, 255);
+    animation: blink 4s infinite alternate;
+  }
+
+  [data-theme="dark"] .header {
+    color: rgb(255, 182, 193);
+    text-shadow:
+      0 0 0 transparent,
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99),
+      0 0 1vw rgb(222, 49, 99);
+    animation: blink 4s infinite alternate;
+  }
+
+  @-webkit-keyframes blink {
+    40% {
+      opacity: 1;
+    }
+    42% {
+      opacity: 0.8;
+    }
+    43% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.2;
+    }
+    46% {
+      opacity: 1;
+    }
+  }
+  @keyframes blink {
+    40% {
+      opacity: 1;
+    }
+    42% {
+      opacity: 0.8;
+    }
+    43% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.2;
+    }
+    46% {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .projectSection {
+        grid-template-columns: repeat(auto-fit, minmax(30vw, 2fr));
+    }
+  }
+
+  
+  @media (max-width: 768px) {
+    .projectSection {
+      grid-template-columns: 1fr;
+      padding-left: 10vw;
+      
+    }
+    .header {
+        font-size: clamp(26px, 6vw, 40px);
+      }
+      .sectionContainer {
+        overflow-y: hidden;
+        
+    }
+  }
+  

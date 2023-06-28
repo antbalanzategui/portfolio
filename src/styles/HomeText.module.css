@@ -1,0 +1,56 @@
+@import './fonts.css';
+
+.cursor {
+    border-left: 2px solid;
+}
+
+.typingText {
+    background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+ [data-theme="dark"] .typingText {
+    background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.introHeader {
+    font-size: 2vw;
+    color: black;
+    line-height: 5vw;
+    font-family: 'Inconsolata'; 
+}
+
+[data-theme="dark"] .introHeader {
+    color: white;
+}
+
+.myName {
+    font-size: clamp(20px, 3vw, 50px);
+    background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+[data-theme="dark"] .myName {
+    background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+}
+@media screen and (max-width: 768px) {
+    .introHeader {
+        font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+        line-height: 50px;
+    }
+    .myName {
+        font-size: clamp(2rem, 3vw, 3rem);
+    }
+}
+
+
