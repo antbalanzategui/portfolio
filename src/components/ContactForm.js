@@ -94,7 +94,7 @@ const ContactForm = () => {
         <div className={styles.formContainer}>
           <div className={styles.leftContainer}>
             <div className={styles.leftInnerContainer}>
-              <h2>Let's Chat</h2>
+              <h2>Lets Chat</h2>
               <p>Feel free to send me a message in the contact form</p>
               <br />
               <p>Or contact me on Linkedin or my Email below</p>
