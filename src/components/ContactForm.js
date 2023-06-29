@@ -121,7 +121,7 @@ const ContactForm = () => {
             <div className={styles.rightInnerContainer}>
               <form onSubmit={handleSubmit}>
                 <h2 className={styles.lgView}>
-                  Contact <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  Message Me! <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {isDarkMode ? (
         <linearGradient id="gradient" gradientTransform="rotate(90)">
         <stop offset="0%" stopColor="rgb(222, 49, 99)" />
@@ -163,9 +163,11 @@ const ContactForm = () => {
                   className={errors.message ? styles.error : ''}
                 ></textarea>
                 {errors.message && <p className={styles.errorText}>{errors.message}</p>}
+                <div className={styles.btnContainer}>
                 <button type="submit" className={`${styles.btn} ${isSubmitDisabled ? styles.disabled : ''}`} disabled={isSubmitDisabled}>
                 <span>Submit</span>
                 </button>
+                </div>
               </form>
               {isSubmitted && (
                 <Checkmark/>

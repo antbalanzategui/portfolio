@@ -1,0 +1,62 @@
+
+  .border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    
+  }
+  
+  .background {
+    
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-image: linear-gradient(
+      45deg,
+      rgb(127, 0, 255),
+      rgb(207, 159, 255),
+      rgb(93, 63, 211),
+      rgb(207, 159, 255),
+      rgb(127, 0, 255)
+    );
+    background-size: 65vw 65vw;
+    animation: gradient 2s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  [data-theme="dark"] .background {
+    background-image: linear-gradient(
+      45deg,
+      rgb(222, 49, 99),
+      rgb(255, 182, 193),
+      rgb(218, 112, 214),
+      rgb(255, 182, 193),
+      rgb(222, 49, 99)
+    );
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .image {
+    border-radius: 10px;
+    width: 98.5%;
+    object-fit: cover;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+  }
+  

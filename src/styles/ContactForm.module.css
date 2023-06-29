@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Arvo:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400&display=swap');
 
 .formContainer {
+    font-family: 'Arvo';
     display: flex;
     background-color: white;
     height: 80vh;
@@ -268,6 +266,11 @@
     }
   }
 
+
+  .btnContainer {
+    overflow: hidden;
+
+  }
   @media (max-width: 768px) {
     .formContainer {
       flex-direction: column;

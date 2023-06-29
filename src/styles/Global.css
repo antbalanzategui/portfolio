@@ -12,7 +12,7 @@
     background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
     background-origin: padding-box;
     background-clip: border-box;
-    background-size: 10vw 10vw, 10vw 10vw, 5vw 5vw, 5vw 5vw;
+    background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
   }
 
 
@@ -29,20 +29,26 @@
     right: 0;
     bottom: 0;
     background: repeating-radial-gradient(
-      farthest-corner at 20% 20%,
-      rgba(255, 255, 255, 0.6) 0,
-      rgba(204, 204, 255, 0.7),
-      rgba(255, 255, 255, 0.6) 40%
+      farthest-corner at 0% 50%,
+      #FFFAFA 0,
+      #f5f5f5 10px,
+      #F8F8FF 10px,
+      #f8f8ff 10px,
+      #EEEEFF 10px
     );
+    opacity: 90%;
   }
   
   [data-theme='dark'] .backgroundGradient {
     background: repeating-radial-gradient(
-      farthest-corner at 20% 20%,
-      rgba(0, 0, 0, 0.95) 0,
-      rgba(25, 25, 30, 0.95),
-      rgba(0, 0, 0, 0.95) 40%
-    );
+    farthest-corner at 0% 50%,
+    rgb(0,0,0) 0,
+    rgb(3,3,3) 10px,
+    rgb(6,6,6) 10px,
+    rgb(9,9,9) 10px,
+    rgb(11, 11, 11) 10px
+  );
+  opacity: 95%;
   }
   
   .contentContainer {
@@ -103,7 +109,7 @@
   
   
   button {
-    border-radius: 20px;
+    border-radius: 4px;
     background: linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255));
     border: none;
     color: #ffffff;
@@ -112,12 +118,21 @@
     padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transition: transform 80ms ease-in;
     cursor: pointer;
+    height: 40px;
+    width: 160px;
   }
 
   [data-theme="dark"] button {
     background: linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193));
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  [data-theme="dark"] button:hover {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
   }
 
   h3 {
@@ -165,6 +180,7 @@
     .hideScrollbar {
       overflow: hidden;
     }
+
   }
 
   

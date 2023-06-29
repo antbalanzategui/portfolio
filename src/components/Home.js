@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
 import HomeText from '../components/HomeText';
+import RotatingImage from '../components/RotatingImage';
 import { GitHub, Linkedin, Download } from 'react-feather';
 
 
@@ -42,7 +43,7 @@ const Home = () => {
         </div>
         </div>
         <div className={styles.imageContainer}>
-          <img className={styles.profilePic} src="./profileImage.jpg"></img>
+        <RotatingImage src="./profileImage.jpg" alt="My Image" />
         </div>
       </div>
     </div>

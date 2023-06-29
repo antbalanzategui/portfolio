@@ -1,7 +1,4 @@
 /* NavBar.module.css */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Arvo:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400&display=swap');
 
   [data-theme="dark"] .nav {
     background-color: black;
@@ -11,16 +8,16 @@
   }
   
   [data-theme="light"] .nav {
-    background-color: rgb(245, 245, 245);
+    background-color: #f8fbf8;
     border-bottom: 2px solid black;
   }
 
   .menu {
-    color: rgba(0, 0, 0, 1);
+    color: black;
   }
 
   [data-theme="dark"] .menu {
-    color: rgba(255, 255, 255, 0.5);
+    color: white;
   }
 
   .nav {
@@ -30,8 +27,6 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     height: 3vw;
@@ -190,6 +185,7 @@
 
     [data-theme="dark"] .mobileMenu {
       border-color: white;
+      background-color: black;
     }
 
     .mobileMenu ul {
@@ -260,6 +256,8 @@
     display: flex;
     width: 50vw;
     border-right: 2px solid black;
+    background-color: white;
+    
 
     .logo {
       display: none;
@@ -270,6 +268,7 @@
 
   [data-theme="dark"] .menuOpen {
     border-color: white;
+    background-color: black;
   }
 }
 

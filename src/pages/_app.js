@@ -13,8 +13,8 @@ const App = () => {
   return (
     <ThemeProvider>
       <div className="container">
-        <NavBar />
         <div className="backgroundGradient"></div>
+        <NavBar />
         <div className="contentContainer">
           <Home />
           <About />

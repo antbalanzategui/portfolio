@@ -2,21 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles/ProjectCard.module.css';
 import { GitHub } from 'react-feather';
-import VanillaTilt from 'vanilla-tilt';
+
+
 
 const ProjectCard = ({ image, title, description, technologies, link }) => {
-  /** 
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    VanillaTilt.init(cardRef.current, {
-      max: 25,
-      speed: 400,
-      glare: true,
-      'max-glare': 0.3,
-    });
-  }, []);
-  */
 
   return (
     <div className={styles.card}>
