@@ -88,7 +88,7 @@
 
   [data-theme="dark"] input, [data-theme="dark"] textarea {
     color: white;
-    border-color: white;
+    border-color: rgba(255, 255, 255, 0.12);
   }
 
   input:-webkit-autofill,
@@ -108,32 +108,7 @@
 
   
   
-  button {
-    border-radius: 4px;
-    background: linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255));
-    border: none;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    height: 40px;
-    width: 160px;
-  }
 
-  [data-theme="dark"] button {
-    background: linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193));
-  }
-
-  button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  [data-theme="dark"] button:hover {
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
-  }
 
   h3 {
     text-align: left;
@@ -179,6 +154,34 @@
     }
     .hideScrollbar {
       overflow: hidden;
+    }
+    .backgroundGradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-radial-gradient(
+        farthest-corner at 0% 100%,
+        #FFFAFA 0,
+        #f5f5f5 10px,
+        #F8F8FF 10px,
+        #f8f8ff 10px,
+        #EEEEFF 10px
+      );
+      opacity: 90%;
+    }
+    
+    [data-theme='dark'] .backgroundGradient {
+      background: repeating-radial-gradient(
+      farthest-corner at 0% 100%,
+      rgb(0,0,0) 0,
+      rgb(3,3,3) 10px,
+      rgb(6,6,6) 10px,
+      rgb(9,9,9) 10px,
+      rgb(11, 11, 11) 10px
+    );
+    opacity: 95%;
     }
 
   }

@@ -2,6 +2,21 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X } from 'react-feather';
 import { ThemeContext } from './ThemeContext';
 import styles from '../styles/NavBar.module.css';
+import { List, ListItem, ListItemText, Divider, IconButton, createTheme,
+  ThemeProvider, } from '@mui/material';
+
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
+    },
+  })
 
 const NavBar = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -85,35 +100,42 @@ const NavBar = () => {
         </li>
       </ul>
       {isMenuOpen && (
-        <div className={styles.mobileMenu}>
-          <ul className={styles.mobileUL}>
-          <li onClick={() => handleMenuClick('home')}>
-              <a>Home</a>
-            </li>
-            <li onClick={() => handleMenuClick('about')}>
-              <a>About</a>
-            </li>
-            <li onClick={() => handleMenuClick('skills')}>
-              <a>Skills</a>
-            </li>
-            <li onClick={() => handleMenuClick('projects')}>
-              <a>Projects</a>
-            </li>
-            <li onClick={() => handleMenuClick('contact')}>
-              <a>Contact</a>
-            </li>
-            <li>
-              <div onClick={toggleTheme} className={styles.iconContainer}>
-                {isDarkMode ? (
-                  <Sun className={styles.mobileThemeIcon} />
-                ) : (
-                  <Moon className={styles.mobileThemeIcon} />
-                )}
-              </div>
-            </li>
-          </ul>
+  <div className={styles.mobileMenu}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+    <List component="nav" aria-label="Mobile Menu">
+      <ListItem button onClick={() => handleMenuClick('home')}>
+        <ListItemText primary="Home" />
+      </ListItem>
+      <Divider />
+      <ListItem button onClick={() => handleMenuClick('about')}>
+        <ListItemText primary="About" />
+      </ListItem>
+      <Divider />
+      <ListItem button onClick={() => handleMenuClick('skills')}>
+        <ListItemText primary="Skills" />
+      </ListItem>
+      <Divider />
+      <ListItem button onClick={() => handleMenuClick('projects')}>
+        <ListItemText primary="Projects" />
+      </ListItem>
+      <Divider />
+      <ListItem button onClick={() => handleMenuClick('contact')}>
+        <ListItemText primary="Contact" />
+      </ListItem>
+      <Divider />
+      <IconButton>
+        <div onClick={toggleTheme} className={styles.iconContainer}>
+          {isDarkMode ? (
+            <Sun className={styles.mobileThemeIcon} />
+          ) : (
+            <Moon className={styles.mobileThemeIcon} />
+          )}
         </div>
-      )}
+      </IconButton>
+    </List>
+    </ThemeProvider>
+  </div>
+)}
     </nav>
   );
 };

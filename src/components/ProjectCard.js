@@ -1,36 +1,134 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../styles/ProjectCard.module.css';
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  Typography,
+  Chip,
+  createTheme,
+  ThemeProvider,
+  Divider
+} from '@mui/material';
 import { GitHub } from 'react-feather';
+import { ThemeContext } from './ThemeContext';
+import styles from '../styles/ProjectCard.module.css';
 
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+})
+
+const titleFontFamily = 'Arvo, Arial, sans-serif';
+const bodyFontFamily = 'Inconsolata, Arial, sans-serif';
+
+// Create a custom theme based on the dark theme
+const customDarkTheme = createTheme(darkTheme, {
+  typography: {
+    h5: {
+      fontFamily: titleFontFamily,
+    },
+    fontFamily: bodyFontFamily,
+  },
+});
+
+// Create a custom theme based on the light theme
+const customLightTheme = createTheme(lightTheme, {
+  typography: {
+    h5: {
+      fontFamily: titleFontFamily,
+    },
+    fontFamily: bodyFontFamily,
+  },
+});
 
 
 const ProjectCard = ({ image, title, description, technologies, link }) => {
+  const { isDarkMode } = useContext(ThemeContext);
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.title}>{title}</h2>
-      <div className={styles.cardImageContainer}>
-        <a className={styles.iconCon} href={link} target="_blank" rel="noopener noreferrer">
-          <div className={styles.iconHolder}>
-            <GitHub className={styles.icon} />
-          </div>
-        </a>
-        <img src={image} alt={title} className={styles.image} />
+    <ThemeProvider theme={isDarkMode ? customDarkTheme : customLightTheme}>
+    <Card variant="outlined" className={styles.card}
+    sx={{
+      transition: 'background-color 0.3s',
+      borderRadius:'20px',
+      '&:hover': {
+        backgroundColor: isDarkMode ? 'rgb(15, 15, 15)' : 'rgb(240, 240, 240)',
+        '& .MuiChip-root': {
+          background: isDarkMode ? 'linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193))' : 'linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255))',
+          color: 'white',
+          transition: 'background 0.3s, color 0.3s', // Add transition for color and background
+        },
+      },
+    }}>
+      <CardHeader
+        sx={{ height: '60px', overflow: 'hidden'}}
+        title={
+          <Typography variant="h5" color={isDarkMode ? 'white' : 'black'}
+          sx={{fontSize: 'clamp(1rem, 1.75vw, 2.5rem)'}}
+          className={styles.title}>
+            {title}
+          </Typography>
+        }
+        action={
+          <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.githubLink}
+              >
+                <div className={styles.iconHolder}>
+                <GitHub className={styles.icon} />
+                </div>
+              </a>
+        }
+      />
+      <div className={styles.cMedia}>
+        <CardMedia
+          className={styles.img}
+          component="img"
+          src={image}
+          alt={title}
+          style={{ width: '90%', aspectRatio: '16/9', objectFit: 'fill',borderRadius:'4px'}}
+        />
       </div>
-      <div className={styles.content}>
-        <p className={styles.description}>{description}</p>
-        <div className={`${styles.circle} ${styles.top}`} >
-        <div className={styles.technologies}>
+      <CardContent>
+      <Divider style={{ margin: '10px 0' }} />
+        <Typography style={{textAlign:'center'}} variant="body2" color={isDarkMode ? 'white' : 'black'}
+        sx ={{fontSize: {
+          lg: '0.9vw',
+          md: '1.2vw',
+          sm: '1.5vw',
+          xs: '2.5vw'
+        }}}>
+          {description}
+        </Typography>
+        <Divider style={{ margin: '10px 0' }} />
+        <div style={{ textAlign: 'center'}}>
           {technologies.map((tech, index) => (
-            <span key={index} className={styles.technology}>
-              {tech}
-            </span>
+            <Chip style={{}}
+              key={index}
+              label={tech}
+              size="small"
+              variant={isDarkMode ? 'outlined' : 'outlined'}
+              sx={{margin: '1px',
+              transition: 'color 0.3s',
+              transition: 'background 0.3s',}}
+            />
           ))}
         </div>
-        </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
+    </ThemeProvider>
   );
 };
 

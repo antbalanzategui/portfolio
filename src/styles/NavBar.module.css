@@ -1,15 +1,13 @@
 /* NavBar.module.css */
 
   [data-theme="dark"] .nav {
-    background-color: black;
+    background-color: none;
     color: white;
-    border-bottom: 2px solid white;
     
   }
   
   [data-theme="light"] .nav {
-    background-color: #f8fbf8;
-    border-bottom: 2px solid black;
+    background-color: none;
   }
 
   .menu {

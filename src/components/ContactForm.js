@@ -1,11 +1,33 @@
 import React, { useState, useContext } from 'react';
 import styles from '../styles/ContactForm.module.css';
-import { GitHub, Linkedin, Mail, Send} from 'react-feather';
+import { GitHub, Linkedin, Mail, Send } from 'react-feather';
 import Checkmark from './Checkmark';
 import XMark from './xMark';
 import { ThemeContext } from './ThemeContext';
+import {
+  Button,
+  createTheme,
+  ThemeProvider,
+  TextField,
+} from '@mui/material';
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: 'rgb(255,255,255)',
+    },
+  },
+});
 
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: 'rgb(15,15,15)',
+    },
+  },
+});
 
 const ContactForm = () => {
   const [name, setName] = useState('');
@@ -26,7 +48,8 @@ const ContactForm = () => {
     } else {
       const nameRegex = /^[A-Za-z\s]+$/;
       if (!name.match(nameRegex)) {
-        formErrors.name = 'Name can only contain alphabetic letters and spaces.';
+        formErrors.name =
+          'Name can only contain alphabetic letters and spaces.';
       }
     }
 
@@ -86,7 +109,6 @@ const ContactForm = () => {
 
   const { isDarkMode } = useContext(ThemeContext);
 
-
   return (
     <section id="contact" className={styles.conSection}>
       <h1 className={styles.header}>‎ Contact ‎</h1>
@@ -100,17 +122,29 @@ const ContactForm = () => {
               <p>Or contact me on Linkedin or my Email below</p>
             </div>
             <div className={styles.iconContainer}>
-              <a href="https://github.com/antbalanzategui" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://github.com/antbalanzategui"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <div className={styles.iconHolder}>
                   <GitHub className={styles.icon} />
                 </div>
               </a>
-              <a href="https://www.linkedin.com/in/antbalanzategui/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://www.linkedin.com/in/antbalanzategui/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <div className={styles.iconHolder}>
                   <Linkedin className={styles.icon} />
                 </div>
               </a>
-              <a href="mailto:antbalanzategui@vt.edu" target="_blank" rel="noopener noreferrer">
+              <a
+                href="mailto:antbalanzategui@vt.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <div className={styles.iconHolder}>
                   <Mail className={styles.icon} />
                 </div>
@@ -121,58 +155,84 @@ const ContactForm = () => {
             <div className={styles.rightInnerContainer}>
               <form onSubmit={handleSubmit}>
                 <h2 className={styles.lgView}>
-                  Message Me! <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {isDarkMode ? (
-        <linearGradient id="gradient" gradientTransform="rotate(90)">
-        <stop offset="0%" stopColor="rgb(222, 49, 99)" />
-        <stop offset="100%" stopColor="rgb(255, 182, 193)" />
-        </linearGradient>
-      ) : (
-      <linearGradient id="gradient" gradientTransform="rotate(90)">
-        <stop offset="0%" stopColor="rgb(127, 0, 255)" />
-        <stop offset="100%" stopColor="rgb(207, 159, 255)" />
-      </linearGradient>
-        )}
-              <Send color="url(#gradient)" />
-              </svg>
+                  Message Me!{' '}
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    {isDarkMode ? (
+                      <linearGradient id="gradient" gradientTransform="rotate(90)">
+                        <stop offset="0%" stopColor="rgb(222, 49, 99)" />
+                        <stop offset="100%" stopColor="rgb(255, 182, 193)" />
+                      </linearGradient>
+                    ) : (
+                      <linearGradient id="gradient" gradientTransform="rotate(90)">
+                        <stop offset="0%" stopColor="rgb(127, 0, 255)" />
+                        <stop offset="100%" stopColor="rgb(207, 159, 255)" />
+                      </linearGradient>
+                    )}
+                    <Send color="url(#gradient)" />
+                  </svg>
                 </h2>
                 <h3>Name</h3>
-                <input
-                  type="text"
-                  placeholder="Name *"
-                  value={name}
-                  onChange={handleNameChange}
-                  className={errors.name ? styles.error : ''}
-                />
-                {errors.name && <p className={styles.errorText}>{errors.name}</p>}
+                <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+                  <TextField
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange}
+                    variant="standard"
+                    className={errors.name ? styles.error : ''}
+                    error={!!errors.name}
+                    helperText={errors.name}
+                    sx={{width: '90%', marginBottom: '1rem'}}
+                  />
+                </ThemeProvider>
                 <h3>Email</h3>
-                <input
-                  type="email"
-                  placeholder="Email *"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className={errors.email ? styles.error : ''}
-                />
-                {errors.email && <p className={styles.errorText}>{errors.email}</p>}
+                <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+                  <TextField
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    variant="standard"
+                    className={errors.email ? styles.error : ''}
+                    error={!!errors.email}
+                    helperText={errors.email}
+                    sx={{width: '90%', marginBottom: '1rem'}}
+                  />
+                </ThemeProvider>
                 <h3>Message</h3>
-                <textarea
-                  rows="4"
-                  placeholder="Message"
-                  value={message}
-                  onChange={handleMessageChange}
-                  className={errors.message ? styles.error : ''}
-                ></textarea>
-                {errors.message && <p className={styles.errorText}>{errors.message}</p>}
+                <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+                  <TextField
+                    multiline
+                    rows={4}
+                    value={message}
+                    onChange={handleMessageChange}
+                    variant="standard"
+                    className={errors.message ? styles.error : ''}
+                    error={!!errors.message}
+                    helperText={errors.message}
+                    sx={{width: '90%', marginBottom: '1rem'}}
+                  />
+                </ThemeProvider>
                 <div className={styles.btnContainer}>
-                <button type="submit" className={`${styles.btn} ${isSubmitDisabled ? styles.disabled : ''}`} disabled={isSubmitDisabled}>
-                <span>Submit</span>
-                </button>
+                  <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      disabled={isSubmitDisabled}
+                      color="primary"
+                      className={styles.btn}
+                    >
+                      <span>Submit</span>
+                    </Button>
+                  </ThemeProvider>
                 </div>
               </form>
-              {isSubmitted && (
-                <Checkmark/>
-              )}
-              {isError && <XMark/>}
+              {isSubmitted && <Checkmark />}
+              {isError && <XMark />}
             </div>
           </div>
         </div>

@@ -11,8 +11,8 @@ const About = () => {
 I&apos;ve always been fascinated by Math and Engineering, which naturally led me to pursue Computer Science.
 I love the logic and problem-solving aspects of programming, and I enjoy creating innovative solutions.
 Although I&apos;ve gained experience in various areas of Computer Science, including algorithms,
-data structures, software development, and artificial intelligence. My main focus in Software Development is creating APIs
-with NodeJS and Express and creating Frontend with React/NextJs.
+data structures, software development, and artificial intelligence. My main focus is in Software Development and creating APIs
+with NodeJS and Express and creating Frontends with React/NextJs.
 
       </p>
     </div>

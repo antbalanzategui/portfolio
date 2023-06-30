@@ -7,11 +7,18 @@
     align-items: center;
     justify-content: center;
     min-height: 600px;
-    border: 0.1rem solid black;
+    border: 0.1rem solid ;
     width: 99%;
-    margin-left: 0.5%;
     border-radius: 10px;
     font-family: 'Arvo';
+    max-width: 1400px;
+    max-height: 800px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .conSection {
@@ -23,6 +30,7 @@
   [data-theme="dark"] .formContainer {
     background-color: rgb(15, 15, 15);
     border: 0.1rem solid white;
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   .leftContainer {
@@ -47,7 +55,7 @@
       rgba(25, 25, 30, 0.95),
       rgba(0, 0, 0, 0.95) 40%
     );
-    border-color: white;
+    border-color: rgba(255, 255, 255, 0.12);
     color: white;
   }
   
@@ -61,12 +69,12 @@
     padding-left: 25px;
     padding-right: 25px;
     text-align: center;
-    padding-top: 16%;
+    padding-top: 10%;
   }
 
   [data-theme="dark"] .rightContainer {
     color: white;
-    border-color: white;
+    border-color: rgba(255, 255, 255, 0.12);
   }
   
   .leftInnerContainer {
@@ -77,23 +85,6 @@
     padding-top: 50px;
     display: flex;
     justify-content: space-evenly;
-  }
-
-  .errorText {
-    color: red;
-    animation-name: fade-in;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-    animation-name: fade-in;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-  }
-  .error {
-    border-color: red !important;
-  }
-
-  .disabled {
-    background: black !important;
   }
   
 
@@ -269,7 +260,6 @@
 
   .btnContainer {
     overflow: hidden;
-
   }
   @media (max-width: 768px) {
     .formContainer {
@@ -285,5 +275,20 @@
     }
     .rightContainer {
         width: 100%;
+        background: repeating-radial-gradient(
+        farthest-corner at 10% 10%,
+      rgba(255, 255, 255, 0.4) 0,
+      rgba(150, 150, 150, 0.5),
+      rgba(255, 255, 255, 0.4) 40%
+    );
+    }
+
+    [data-theme="dark"] .rightContainer {
+      background: repeating-radial-gradient(
+        farthest-corner at 10% 10%,
+      rgba(0, 0, 0, 0.95) 0,
+      rgba(25, 25, 30, 0.95),
+      rgba(0, 0, 0, 0.95) 40%
+    );
     }
   }

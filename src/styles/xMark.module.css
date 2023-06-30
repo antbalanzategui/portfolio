@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 20px;
   animation: fade-out 0.8s ease-in-out 5s forwards;
 }
 
