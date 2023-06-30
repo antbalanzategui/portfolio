@@ -266,7 +266,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-left: 0.2%;
       height: 600px;
     }
   
@@ -284,6 +283,7 @@
     }
 
     [data-theme="dark"] .rightContainer {
+      
       background: repeating-radial-gradient(
         farthest-corner at 10% 10%,
       rgba(0, 0, 0, 0.95) 0,
