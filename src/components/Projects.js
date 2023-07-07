@@ -84,6 +84,7 @@ const projects = [
     return (
     <section id="projects" className={styles.sectionContainer}>
     <h1 className={styles.header}>‎ Projects ‎</h1>
+    <div className={styles.gridCon}>
       <div className={styles.projectSection}>
         {projects.map((project, index) => (
           <ProjectCard
@@ -96,6 +97,7 @@ const projects = [
             link={project.link}
           />
         ))}
+      </div>
       </div>
       </section>
     );

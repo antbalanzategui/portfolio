@@ -183,7 +183,7 @@ const ContactForm = () => {
                     type="text"
                     value={name}
                     onChange={handleNameChange}
-                    variant="standard"
+                    variant="outlined"
                     className={errors.name ? styles.error : ''}
                     error={!!errors.name}
                     helperText={errors.name}
@@ -196,7 +196,7 @@ const ContactForm = () => {
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
-                    variant="standard"
+                    variant="outlined"
                     className={errors.email ? styles.error : ''}
                     error={!!errors.email}
                     helperText={errors.email}
@@ -210,7 +210,7 @@ const ContactForm = () => {
                     rows={4}
                     value={message}
                     onChange={handleMessageChange}
-                    variant="standard"
+                    variant="outlined"
                     className={errors.message ? styles.error : ''}
                     error={!!errors.message}
                     helperText={errors.message}

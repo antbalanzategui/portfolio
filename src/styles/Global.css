@@ -13,6 +13,7 @@
     background-origin: padding-box;
     background-clip: border-box;
     background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
+    background-attachment: fixed;
   }
 
 
@@ -29,7 +30,7 @@
     right: 0;
     bottom: 0;
     background: repeating-radial-gradient(
-      farthest-corner at 0% 50%,
+      farthest-corner at 0% 0%,
       #FFFAFA 0,
       #f5f5f5 10px,
       #F8F8FF 10px,
@@ -37,17 +38,19 @@
       #EEEEFF 10px
     );
     opacity: 90%;
+    background-attachment: fixed;
   }
   
   [data-theme='dark'] .backgroundGradient {
     background: repeating-radial-gradient(
-    farthest-corner at 0% 50%,
+    farthest-corner at 0% 0%,
     rgb(0,0,0) 0,
     rgb(3,3,3) 10px,
     rgb(6,6,6) 10px,
     rgb(9,9,9) 10px,
     rgb(11, 11, 11) 10px
   );
+  background-attachment: fixed;
   opacity: 95%;
   }
   
@@ -170,6 +173,7 @@
         #EEEEFF 10px
       );
       opacity: 90%;
+      background-attachment: fixed;
     }
     
     [data-theme='dark'] .backgroundGradient {
@@ -182,6 +186,7 @@
       rgb(11, 11, 11) 10px
     );
     opacity: 95%;
+    background-attachment: fixed;
     }
 
   }

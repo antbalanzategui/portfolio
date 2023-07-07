@@ -123,14 +123,13 @@ const NavBar = () => {
         <ListItemText primary="Contact" />
       </ListItem>
       <Divider />
-      <IconButton>
-        <div onClick={toggleTheme} className={styles.iconContainer}>
+      <IconButton onClick={toggleTheme}>
+
           {isDarkMode ? (
-            <Sun className={styles.mobileThemeIcon} />
+            <Sun className={styles.mobileThemeIcon}/>
           ) : (
-            <Moon className={styles.mobileThemeIcon} />
+            <Moon className={styles.mobileThemeIcon}/>
           )}
-        </div>
       </IconButton>
     </List>
     </ThemeProvider>

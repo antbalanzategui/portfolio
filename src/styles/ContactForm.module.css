@@ -123,6 +123,7 @@
     opacity: 1;
     transition: opacity 300ms ease-out, transform 300ms ease-out;
     clip-path: circle(100% at center);
+    border-radius: 50%;
   }
 
   [data-theme="dark"] .iconHolder:before {

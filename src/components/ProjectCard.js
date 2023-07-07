@@ -74,7 +74,7 @@ const ProjectCard = ({ image, title, description, technologies, link }) => {
         sx={{ height: '60px', overflow: 'hidden'}}
         title={
           <Typography variant="h5" color={isDarkMode ? 'white' : 'black'}
-          sx={{fontSize: 'clamp(1rem, 1.75vw, 2.5rem)'}}
+          sx={{fontSize: 'clamp(1rem, 1.75vw, 2rem)'}}
           className={styles.title}>
             {title}
           </Typography>
@@ -105,7 +105,7 @@ const ProjectCard = ({ image, title, description, technologies, link }) => {
       <Divider style={{ margin: '10px 0' }} />
         <Typography style={{textAlign:'center'}} variant="body2" color={isDarkMode ? 'white' : 'black'}
         sx ={{fontSize: {
-          lg: '0.9vw',
+          lg: '100%',
           md: '1.2vw',
           sm: '1.5vw',
           xs: '2.5vw'

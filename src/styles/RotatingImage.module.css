@@ -58,5 +58,6 @@
     object-fit: cover;
     padding-top: 0.75%;
     padding-bottom: 0.75%;
+    aspect-ratio: 1/1;
   }
   

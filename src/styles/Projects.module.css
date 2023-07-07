@@ -9,13 +9,21 @@
 
 .projectSection {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30vw, 3fr));
-    grid-gap: max(2vw, 40px);
+    grid-template-columns: repeat(auto-fit, minmax(30%, 3fr));
+    grid-gap: 40px;
     padding-left: 30px;
     padding-right: 30px;
     overflow-y: hidden;
     padding-bottom: 50px;
     padding-top: 50px;
+    max-width: 1800px;
+  }
+
+  .gridCon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   }
   .header {
     font-family: 'Inconsolata';
@@ -85,6 +93,12 @@
     }
     46% {
       opacity: 1;
+    }
+  }
+
+  @media (min-width: 1940px) {
+    .projectSection {
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     }
   }
 
