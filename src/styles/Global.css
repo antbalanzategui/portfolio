@@ -39,6 +39,7 @@
     );
     opacity: 90%;
     background-attachment: fixed;
+    animation: gradient 30s ease infinite; 
   }
   
   [data-theme='dark'] .backgroundGradient {
@@ -52,6 +53,17 @@
   );
   background-attachment: fixed;
   opacity: 95%;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+    100% {
+      background-size: 150% 150%, 150% 150%, 70px 70px, 70px 70px;
+      background-position: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    }
   }
   
   .contentContainer {
@@ -150,6 +162,9 @@
     background: #aaa;
   }
   @media (max-width: 768px) {
+    .container {
+      background-attachment: fixed;
+    }
     .blurEffect {
     transition: filter 0.3s ease; /* Add transition effect to the filter property */
     pointer-events: none; /* Prevent interaction with blurred elements */

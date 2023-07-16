@@ -44,81 +44,11 @@
   .skills-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
     justify-items: center;
     padding: 50px;
-  }
-  
-  
-  
-
-  
-  .icon {
-    width: 10vw; /* Adjust the size as needed */
-    height: 10vw;
-    margin: 10px;
-    min-width: 90px;
-    min-height: 90px;
-    object-fit: contain;
+    gap: 0px 100px;
   }
 
-  .icon-card {
-    background-color: #fff;
-    border-radius: 11px;
-    box-shadow: -5px 5px 5px 5px rgb(207, 159, 255);
-    padding: 20px;
-    margin: 10px;
-    border: solid 1px;
-    border-color: black;
-  }
-
-  [data-theme="dark"] .icon-card {
-    border-color: rgba(255, 255, 255, 0.12);
-  }
-  .icon-card {
-    position: relative;
-  }
-  
-  .tooltip {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    z-index: 2;
-    width: 80%;
-    height: 80%;
-  }
-
-  [data-theme="dark"] .tooltip {
-    background-color: rgba(25, 25, 25, 0.8);
-    color: white;
-  }
-  
-  .tooltip h3 {
-    margin: 0;
-    text-align: center;
-  }
-  
-  .tooltip p {
-    margin: 5px 0;
-  }
-
-  
-
-
-
-  [data-theme="dark"] .icon-card {
-    box-shadow: -5px 5px 5px 5px rgb(222, 49, 99);
-  }
-
-  [data-theme="dark"] .icon-card {
-    background-color: rgb(15,15,15);
-  }
 
 
   
@@ -157,6 +87,14 @@
     }
   }
 
+  @media (min-width: 1940px) {
+
+    .skills-wrapper {
+      width: 1700px;
+    }
+    
+  }
+
   @media (max-width: 768px) {
     .skill-header {
       font-size: clamp(26px, 6vw, 40px);
@@ -172,6 +110,7 @@
 
     .skills-wrapper {
       grid-template-columns: 1fr;
+      gap: 0px;
     }
 
 

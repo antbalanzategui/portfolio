@@ -268,28 +268,21 @@
       align-items: center;
       justify-content: center;
       height: 600px;
+      background-color: none;
+      background: none;
+    }
+
+    [data-theme="dark"] .formContainer {
+      background-color: none;
+      background: none;
     }
   
     .leftContainer {
       display: none;
+      background: none;
     }
     .rightContainer {
         width: 100%;
-        background: repeating-radial-gradient(
-        farthest-corner at 10% 10%,
-      rgba(255, 255, 255, 0.4) 0,
-      rgba(150, 150, 150, 0.5),
-      rgba(255, 255, 255, 0.4) 40%
-    );
-    }
-
-    [data-theme="dark"] .rightContainer {
-      
-      background: repeating-radial-gradient(
-        farthest-corner at 10% 10%,
-      rgba(0, 0, 0, 0.95) 0,
-      rgba(25, 25, 30, 0.95),
-      rgba(0, 0, 0, 0.95) 40%
-    );
+        background: none;
     }
   }
