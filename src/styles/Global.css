@@ -39,7 +39,7 @@
     );
     opacity: 90%;
     background-attachment: fixed;
-    animation: gradient 30s ease infinite; 
+    
   }
   
   [data-theme='dark'] .backgroundGradient {
@@ -161,6 +161,8 @@
   [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background: #aaa;
   }
+
+
   @media (max-width: 768px) {
     .container {
       background-attachment: fixed;
@@ -205,6 +207,15 @@
     }
 
   }
+
+  @media (min-width: 768px) {
+    .backgroundGradient {
+      animation: gradient 30s ease infinite; 
+    }
+  }
+  
+
+  
 
   
   

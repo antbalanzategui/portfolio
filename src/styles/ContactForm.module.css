@@ -19,6 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
   }
 
   .conSection {
@@ -189,7 +190,7 @@
 
   .header {
     font-family: 'Inconsolata';
-    text-align: center;
+    text-align: left;
     font-size: clamp(60px, 15vw, 75px);
     margin-bottom: 20px;
     color: rgb(127, 0, 255);
@@ -205,7 +206,9 @@
       0 0 1vw rgb(207, 159, 255),
       0 0 1vw rgb(207, 159, 255);
     animation: blink 4s infinite alternate;
+    padding-left: 5vw;
   }
+  
 
   [data-theme="dark"] .header {
     color: rgb(255, 182, 193);
@@ -262,19 +265,50 @@
   .btnContainer {
     overflow: hidden;
   }
+
+  .hDivider {
+    margin-top: 20px;
+    flex-grow: 1;
+  }
+  
+  .hDivider .shadow {
+    height: 20px;
+  }
+  
+  .hDivider .shadow:after {
+    content: '';
+    display: block;
+    margin: -25px auto 0;
+    width: 100%;
+    height: 25px;
+    border-radius: 125px/12px;
+    box-shadow: 0 0 8px black;
+  }
+
+  [data-theme="dark"] .hDivider .shadow:after {
+    box-shadow: 0 0 8px white;
+  }
+
+  .trueHead {
+    display: flex; /* Change 'inline' to 'flex' to enable flex layout */
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .hDivider {
+      margin-top: 0px;
+    }
+  }
+  
   @media (max-width: 768px) {
     .formContainer {
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 600px;
-      background-color: none;
-      background: none;
     }
 
     [data-theme="dark"] .formContainer {
-      background-color: none;
-      background: none;
     }
   
     .leftContainer {
@@ -283,6 +317,8 @@
     }
     .rightContainer {
         width: 100%;
-        background: none;
+    }
+    .header {
+      font-size: clamp(26px, 6vw, 40px);
     }
   }

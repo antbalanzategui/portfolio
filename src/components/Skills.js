@@ -6,10 +6,14 @@ const Skills = () => {
 
   return (
     <section className={styles.skills} id="skills">
-      <h2 className={styles['skill-header']}>‎ Skills ‎</h2>
-
+      <div className={styles.trueHead}>
+      <h1 className={styles['skill-header']}>‎Skills ‎</h1>
+      <div class={styles.hDivider}>
+      <div class={styles.shadow}></div>
+      </div>
+      </div>
      
-
+      <div className={styles.flexOverGrid}>
       <div className={styles['skills-wrapper']}>
 
       <SkillCard
@@ -44,6 +48,7 @@ const Skills = () => {
       />
 
         
+      </div>
       </div>
     </section>
   );

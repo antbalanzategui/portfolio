@@ -83,7 +83,12 @@ const projects = [
   
     return (
     <section id="projects" className={styles.sectionContainer}>
-    <h1 className={styles.header}>‎ Projects ‎</h1>
+    <div className={styles.trueHead}>
+    <h1 className={styles.header}>‎Projects ‎</h1>
+    <div class={styles.hDivider}>
+    <div class={styles.shadow}></div>
+    </div>
+    </div>
     <div className={styles.gridCon}>
       <div className={styles.projectSection}>
         {projects.map((project, index) => (

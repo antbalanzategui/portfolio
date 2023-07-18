@@ -111,7 +111,12 @@ const ContactForm = () => {
 
   return (
     <section id="contact" className={styles.conSection}>
-      <h1 className={styles.header}>‎ Contact ‎</h1>
+      <div className={styles.trueHead}>
+      <h1 className={styles.header}>‎Contact ‎</h1>
+      <div class={styles.hDivider}>
+      <div class={styles.shadow}></div>
+      </div>
+      </div>
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <div className={styles.leftContainer}>

@@ -24,6 +24,8 @@
     min-width: 50px;
     min-height: 50px;
     border-radius: 50%;
+    max-height: 70px;
+    max-width: 70px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -61,6 +63,8 @@
     height: 3vw;
     min-width: 30px;
     min-height: 30px;
+    max-height: 50px;
+    max-width: 50px;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -77,6 +81,8 @@
     height: 3.5vw;
     min-width: 38px;
     min-height: 38px;
+    max-width: 58px;
+    max-height: 58px;
   }
 
   [data-theme="dark"] .iconHolder:hover .icon {

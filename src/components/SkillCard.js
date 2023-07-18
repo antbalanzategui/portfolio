@@ -15,7 +15,7 @@ const SkillCard = ({ icon, title, description }) => {
   return (
     <div className={styles.skillCardContainer}>
       <div className={styles.iconContainer}>
-        <div className={styles.sIconContainer}>
+        <div className={`${styles.sIconContainer} ${isHovered ? styles.hovered : ''}`} >
         <img className={`${styles.cardIcon} ${isHovered ? styles.hovered : ''}`}src={icon} alt="Skill Icon" />
         </div>
       </div>

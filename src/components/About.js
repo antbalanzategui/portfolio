@@ -5,7 +5,14 @@ const About = () => {
   return (
     <section id="about">
     <div className={styles.aboutContainer}>
-      <h1 className={styles.header}>‎ About Me ‎</h1>
+      <div className={styles.trueHead}>
+      <h1 className={styles.header}>‎About‎</h1>
+
+      <div class={styles.hDivider}>
+      <div class={styles.shadow}></div>
+      </div>
+      </div>
+      <div className={styles.pCon}>
       <p className={styles.text}> 
       My name is Antonio, and I&apos;m a Computer Science student at Virginia Tech&apos;s Engineering program.
 I&apos;ve always been fascinated by Math and Engineering, which naturally led me to pursue Computer Science.
@@ -15,6 +22,7 @@ data structures, software development, and artificial intelligence. My main focu
 with NodeJS and Express and creating Frontends with React/NextJs.
 
       </p>
+      </div>
     </div>
     </section>
   );

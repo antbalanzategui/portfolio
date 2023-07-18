@@ -1,3 +1,4 @@
+
 .iconContainer {
     display: flex;
     justify-content: center;
@@ -5,37 +6,75 @@
     z-index: 1; /* Set a higher z-index to make the icon appear above the card */
     top: min(7vw, 50px);
 
+    width: 30%;
+    transform: translateX(120%);
+
   }
 
   
 .cardIcon {
     /* Add any styles for the icon here */
     aspect-ratio: 1/1;
-    width: 95%;
-    background-color: #fff;
-    border-radius: 10px;
-    border: solid 1px black;
+    width: 100%;
+    background-color: none;
     transition: background-color 0.3s ease;
+    
   }
   
   
   
   
   [data-theme="dark"] .cardIcon {
-    background-color: #121212;
-    border: solid 1px rgba(255, 255, 255, 0.12);
+    background-color: none;
+    
+
+
+  }
+
+  .cardIcon {
+
   }
 
 
   .cardIcon.hovered {
-    background-color: rgb(127, 0, 255); /* Change the background color here */
+
   }
   [data-theme="dark"] .cardIcon.hovered {
-    background-color: rgb(222, 49, 99); /* Change the background color here */
+
   }
+
+
+
   
   .sIconContainer {
-    width: 20%;
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 10px;
+    background-image: linear-gradient(
+    to right,
+    rgb(207, 159, 255), rgb(127, 0, 255)
+  );
+    background-color: none;
+  }
+
+  [data-theme="dark"] .sIconContainer {
+    background-image: linear-gradient(to right, rgb(222, 49, 99), rgb(255, 182, 193));
+  }
+
+  .sIconContainer.hovered {
+    transition: background-color 0.3s ease;
+    background-color: #fff;
+    background-image: none;
+  }
+
+
+
+  [data-theme="dark"] .sIconContainer.hovered {
+    background-color: #121212;
+
   }
 
   .skillCardContainer {
@@ -56,8 +95,9 @@
     border: 1px solid black;
     transition: background-color 0.3s ease;
     padding-bottom: 50px;
-    min-height: max(18vw, 165px);
-    font-family: "Ubuntu"
+    min-height: max(12vw, 165px);
+    font-family: "Ubuntu";
+    
     
   }
 
@@ -67,35 +107,60 @@
     border: solid 1px rgba(255, 255, 255, 0.12);
   }
 
+  .cardContent:before {
+    position: absolute;
+    content: "";
+    inset: 0; /* same as { top: 0; right: 0; bottom: 0; left: 0; } */
+    background-image: linear-gradient(to bottom, rgb(207, 159, 255), rgb(127, 0, 255));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.25s linear;
+  }
+  
+  [data-theme="dark"] .cardContent:before {
+    background-image: linear-gradient(to bottom, rgb(222, 49, 99), rgb(255, 182, 193));
+  }
+
+  .cardContent:hover::before {
+    opacity: 1;
+
+  }
+
   .cardContent:hover {
     background-color: rgb(240, 240, 240);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25), 0 6px 6px rgba(0, 0, 0, 0.2);
+    border-color: white;
   }
   
   /* Apply box shadow to the card content on hover for dark theme */
   [data-theme="dark"] .cardContent:hover {
     background-color: rgb(15, 15, 15);
     box-shadow: 0 12px 20px rgba(255, 255, 255, 0.15), 0 6px 6px rgba(255, 255, 255, 0.1);
+    border-color: rgb(15,15,15);
   }
 
   .skillCardTitle {
-    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-size: clamp(1.5rem, 2vw, 3rem);
     margin-top: 40px;
     text-align: center;
+    /*
     background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
     padding-bottom: 20px;
   }
 
   [data-theme="dark"] .skillCardTitle {
+    /*
     background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    */
   }
 
   .skillCardDescription {
-    font-size: clamp(1rem, 2.5vw, 2.5rem);
+    font-size: clamp(1.25rem, 1.5vw, 2.5rem);
   }
 
   @media (min-width: 1940px) {
