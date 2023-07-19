@@ -113,8 +113,8 @@ const ContactForm = () => {
     <section id="contact" className={styles.conSection}>
       <div className={styles.trueHead}>
       <h1 className={styles.header}>‎Contact ‎</h1>
-      <div class={styles.hDivider}>
-      <div class={styles.shadow}></div>
+      <div className={styles.hDivider}>
+      <div className={styles.shadow}></div>
       </div>
       </div>
       <div className={styles.container}>

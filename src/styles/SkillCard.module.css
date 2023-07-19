@@ -31,18 +31,6 @@
 
   }
 
-  .cardIcon {
-
-  }
-
-
-  .cardIcon.hovered {
-
-  }
-  [data-theme="dark"] .cardIcon.hovered {
-
-  }
-
 
 
   
@@ -121,19 +109,19 @@
     background-image: linear-gradient(to bottom, rgb(222, 49, 99), rgb(255, 182, 193));
   }
 
-  .cardContent:hover::before {
+  .cardContent.hovered::before {
     opacity: 1;
 
   }
 
-  .cardContent:hover {
+  .cardContent.hovered {
     background-color: rgb(240, 240, 240);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25), 0 6px 6px rgba(0, 0, 0, 0.2);
     border-color: white;
   }
   
   /* Apply box shadow to the card content on hover for dark theme */
-  [data-theme="dark"] .cardContent:hover {
+  [data-theme="dark"] .cardContent.hovered {
     background-color: rgb(15, 15, 15);
     box-shadow: 0 12px 20px rgba(255, 255, 255, 0.15), 0 6px 6px rgba(255, 255, 255, 0.1);
     border-color: rgb(15,15,15);

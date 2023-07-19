@@ -8,8 +8,8 @@ const Skills = () => {
     <section className={styles.skills} id="skills">
       <div className={styles.trueHead}>
       <h1 className={styles['skill-header']}>‎Skills ‎</h1>
-      <div class={styles.hDivider}>
-      <div class={styles.shadow}></div>
+      <div className={styles.hDivider}>
+      <div className={styles.shadow}></div>
       </div>
       </div>
      

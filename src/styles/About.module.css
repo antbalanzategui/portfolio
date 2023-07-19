@@ -8,6 +8,19 @@
 
   }
 
+  .highlight {
+    background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  }
+
+  [data-theme="dark"] .highlight {
+    background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
   /* rgb(207, 159, 255), rgb(127, 0, 255)*/
   
   .header {

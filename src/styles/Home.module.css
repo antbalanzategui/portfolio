@@ -125,6 +125,12 @@
     border-radius: 10px;
 
   }
+
+  @media (min-width: 2000px) {
+    .homeContainer {
+      min-height: 75vh;
+    }
+  }
   @media (min-width: 768.1px) {
     .content {
       flex-direction: row;
