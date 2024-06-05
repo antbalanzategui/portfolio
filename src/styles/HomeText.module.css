@@ -21,7 +21,7 @@
 
 
 .introHeader {
-    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
     color: black;
     line-height: 230%;
     font-family: 'Inconsolata'; 

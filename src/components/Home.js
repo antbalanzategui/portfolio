@@ -42,9 +42,11 @@ const Home = () => {
               </a>
         </div>
         </div>
+        {/*
         <div className={styles.imageContainer}>
         <RotatingImage src="./profileImage.jpg" alt="My Image" />
         </div>
+        */} 
       </div>
     </div>
     </section>
