@@ -59,14 +59,15 @@ const ProjectCard = ({ image, title, description, technologies, link }) => {
     <ThemeProvider theme={isDarkMode ? customDarkTheme : customLightTheme}>
     <Card variant="outlined" className={styles.card}
     sx={{
-      transition: 'background-color 0.3s',
+      backgroundColor: isDarkMode ? 'rgb(22, 25, 28)' : '#e3dff2',
+      transition: 'transform 0.3s, box-shadow 0.3s, background-color 0.3s',
       borderRadius:'20px',
       '&:hover': {
-        backgroundColor: isDarkMode ? 'rgb(15, 15, 15)' : 'rgb(240, 240, 240)',
+        backgroundColor: isDarkMode ? 'rgb(17, 20, 23)' : 'rgb(232, 228, 247)',
         '& .MuiChip-root': {
-          background: isDarkMode ? 'linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193))' : 'linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255))',
+          background: isDarkMode ? 'linear-gradient(45deg, #FD9745, #FD9745)' : 'linear-gradient(45deg, #a388ee, #a388ee)',
           color: 'white',
-          transition: 'background 0.3s, color 0.3s', // Add transition for color and background
+          transition: 'background 0.3s, color 0.3s'
         },
       },
     }}>

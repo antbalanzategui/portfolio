@@ -1,58 +1,82 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Arvo:400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400&display=swap');
+
 
 .cursor {
     border-left: 2px solid;
 }
 
-.typingText {
-    background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
-    -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-}
-
- [data-theme="dark"] .typingText {
-    background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-
-.introHeader {
-    font-size: clamp(1.5rem, 2.5vw, 3rem);
-    color: black;
-    line-height: 230%;
-    font-family: 'Inconsolata'; 
-}
 
 [data-theme="dark"] .introHeader {
     color: white;
 }
 
 .myName {
-    font-size: clamp(20px, 3vw, 50px);
-    background: -webkit-linear-gradient(rgb(207, 159, 255), rgb(127, 0, 255));
+    font-size: clamp(100px, 10vw, 225px);
+    background: -webkit-linear-gradient(#a388ee, #9e66ff);
     -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
+
+.descContainer {
+    padding-bottom: 10px;
+    border-top: clamp(1px, 1vw, 3px) solid black;
+    padding-top: 10px;
+    font-family: "Tiny5", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(1rem, 2vw, 10rem);
+}
+
+[data-theme="dark"] .descContainer {
+    color: white;
+    border-color: white;
+}
+
+
 
 [data-theme="dark"] .myName {
-    background: -webkit-linear-gradient(rgb(222, 49, 99), rgb(255, 182, 193));
+    background: -webkit-linear-gradient(#FD9745, #fc7303);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
   
 }
+
+.nameContainer {
+    border-top: clamp(1px, 1vw, 3px) solid black;
+    border-bottom: clamp(1px, 1vw, 3px) solid black;
+}
+[data-theme="dark"] .nameContainer {
+    border-color: white;
+}
+
+
+
 @media screen and (max-width: 768px) {
     .introHeader {
         font-size: clamp(1.5rem, 2.5vw, 2.5rem);
         line-height: 50px;
     }
     .myName {
-        font-size: clamp(2rem, 3vw, 3rem);
+        font-size: clamp(3rem, 4vw, 20rem);
     }
 }
+
+.highlight {
+    background: #a388ee;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  }
+
+  [data-theme="dark"] .highlight {
+    background: #FD9745;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+
 
 

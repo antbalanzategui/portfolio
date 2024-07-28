@@ -4,17 +4,19 @@
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .card:hover {
-box-shadow: 0 14px 28px
-rgba(0,0,0,0.25), 0 10px 10px
-rgba(0,0,0,0.22);
+  transform: translate(0, -10px); /* Move the card up */
+  box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.4); /* Add a larger shadow */
 }
 
 [data-theme="dark"] .card:hover {
-  box-shadow: 0 14px 28px
-  rgba(255,255,255,0.15), 0 10px 10px
-  rgba(255,255,255,0.1);
-  }
+  box-shadow: 0 14px 28px rgba(255, 255, 255, 0.15), 
+              0 10px 10px rgba(255, 255, 255, 0.1); /* Adjust shadow for dark theme */
+}
 
 .cMedia {
   display: flex;
@@ -53,7 +55,7 @@ rgba(0,0,0,0.22);
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255));
+    background: linear-gradient(45deg, #a388ee, #a388ee);
     opacity: 1;
     transition: opacity 300ms ease-out, transform 300ms ease-out;
     clip-path: circle(100% at center);
@@ -61,7 +63,7 @@ rgba(0,0,0,0.22);
   }
 
   [data-theme="dark"] .iconHolder:before {
-    background: linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193));
+    background: linear-gradient(45deg, #FD9745, #FD9745);
   }
   
   .iconHolder:hover:before {
@@ -86,13 +88,13 @@ rgba(0,0,0,0.22);
   }
   
   .iconHolder:hover .icon {
-    color: rgb(127, 0, 255);
+    color: #9e66ff;
     min-width: 30px;
     min-height: 30px;
   }
 
   [data-theme="dark"] .iconHolder:hover .icon {
-    color: rgb(222, 49, 99);
+    color: #fc7303;
   }
   
 
@@ -105,17 +107,17 @@ rgba(0,0,0,0.22);
 
   @keyframes gradientAnimation {
     0% {
-      background: radial-gradient(circle, #8000ff, #a600ff, #cc00ff, rgb(127, 0, 255));
+      background: radial-gradient(circle, #a388ee, #9e66ff, #7a3ee6, #6529e0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     50% {
-      background: radial-gradient(circle, rgb(127, 0, 255), #cc00ff, #a600ff, #8000ff);
+      background: radial-gradient(circle, #6529e0, #7a3ee6, #9e66ff, #a388ee);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     100% {
-      background: radial-gradient(circle, #8000ff, #a600ff, #cc00ff, rgb(127, 0, 255));
+      background: radial-gradient(circle, #a388ee, #9e66ff, #7a3ee6, #6529e0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -123,17 +125,17 @@ rgba(0,0,0,0.22);
 
   @keyframes darkGradientAnimation {
     0% {
-      background: radial-gradient(circle, #ff0080, rgb(227, 11, 92), rgb(255, 105, 180), rgb(222, 49, 99));
+      background: radial-gradient(circle, #FD9745, #fc7303, #d45500, #bf3c00);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     50% {
-      background: radial-gradient(circle, rgb(222, 49, 99), rgb(255, 105, 180), rgb(227, 11, 92), #ff0080);
+      background: radial-gradient(circle, #bf3c00, #d45500, #fc7303, #FD9745);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     100% {
-      background: radial-gradient(circle, #ff0080, rgb(227, 11, 92), rgb(255, 105, 180), rgb(222, 49, 99));
+      background: radial-gradient(circle, #FD9745, #fc7303, #d45500, #bf3c00);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }

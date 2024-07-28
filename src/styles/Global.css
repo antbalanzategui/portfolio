@@ -47,11 +47,11 @@
   [data-theme='dark'] .backgroundGradient {
     background: repeating-radial-gradient(
     farthest-corner at 0% 0%,
-    rgb(0,0,0) 0,
-    rgb(3,3,3) 10px,
-    rgb(6,6,6) 10px,
-    rgb(9,9,9) 10px,
-    rgb(11, 11, 11) 10px
+    rgb(15,16,19) 0,
+    rgb(18,19,22) 10px,
+    rgb(21,22,27) 10px,
+    rgb(24,25,29) 10px,
+    rgb(27, 28, 31) 10px
   );
   background-attachment: fixed;
   opacity: 95%;

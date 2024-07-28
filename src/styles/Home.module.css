@@ -5,14 +5,16 @@
     align-items: center;
     padding-top: 100px;
     overflow-y: hidden;
-    padding-bottom: 200px;
+    padding-bottom: 10px;
   }
 
   .iconContainer {
-    padding-top: 50px;
     display: flex;
     justify-content: space-evenly;
     position: relative;
+    flex-direction: column;
+    gap: 50px; /* Adjust as needed */
+    margin-top: 10%;
   }
 
 
@@ -39,7 +41,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgb(207, 159, 255), rgb(127, 0, 255));
+    background: #a388ee;
     opacity: 1;
     transition: opacity 300ms ease-out, transform 300ms ease-out;
     clip-path: circle(100% at center);
@@ -47,7 +49,7 @@
   }
 
   [data-theme="dark"] .iconHolder:before {
-    background: linear-gradient(45deg, rgb(222, 49, 99), rgb(255, 182, 193));
+    background: #FD9745;
   }
   
   .iconHolder:hover:before {
@@ -76,7 +78,7 @@
   }
   
   .iconHolder:hover .icon {
-    color: rgb(127, 0, 255);
+    color: #9e66ff;
     width: 3.5vw;
     height: 3.5vw;
     min-width: 38px;
@@ -86,9 +88,122 @@
   }
 
   [data-theme="dark"] .iconHolder:hover .icon {
-    color: rgb(222, 49, 99);
+    color: #fc7303;
   }
   
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1200px; /* Optional, to limit maximum width */
+    margin: 0 auto;
+    background-color: #e3dff2;
+    border: 2px solid #000;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  [data-theme="dark"] .container {
+    background-color: rgb(22, 25, 28);
+    border: solid 2px rgba(255, 255, 255, 0.12)
+  }
+  
+  .aboutMeContent {
+    flex: 1;
+    padding: 10px;
+    
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .aboutMeContent, .iconContainer {
+      width: 100%;
+      text-align: center;
+      padding: 0;
+    }
+    .iconContainer {
+      flex-direction: row;
+    }
+    .header {
+      justify-content: center;
+    }
+  }
+
+  [data-theme="dark"] .aboutMeContent {
+    color: white;
+  }
+
+  [data-theme="dark"] .header {
+    color: #fc7303;
+  }
+
+  .pCon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .highlight {
+    background: #a388ee;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  }
+
+  [data-theme="dark"] .highlight {
+    background: #FD9745;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color:#9e66ff;
+  }
+
+  .boxIcon {
+    margin-right: 10px; /* Adjust as needed */
+    width: 3vw;
+    height: 3vw;
+    min-width: 30px;
+    min-height: 30px;
+    max-height: 50px;
+    max-width: 50px;
+  }
+
+  
+  .date {
+    font-size: clamp(30px, 3vw, 50px);
+  }
+
+  .nameOutline {
+    background-color: #a388ee;
+    box-shadow: 5px 5px 2px 1px #000;
+    padding: 5px; /* Add padding to ensure the border is fully visible */
+    display: inline-block; /* Ensure the span is treated as a block for padding and margin */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    line-height: 1.2; /* Adjust line height to ensure enough space around the text */
+    margin: 0; /* Ensure no margin is added */
+    font-size: clamp(10px, 6vw, 60px);
+  }
+
+  [data-theme="dark"] .nameOutline {
+    background-color: #FD9745;
+    color: black;
+  }
+
+  .text {
+    font-size: clamp(15px, 2vw, 35px);
+  }
   
   
   
@@ -107,6 +222,8 @@
   .textContainer {
     order: 1;
     text-align: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
   
   .imageContainer {
@@ -117,20 +234,14 @@
     padding-left: 7.5%;
   }
 
-  
-
-  .profilePic {
-    aspect-ratio: 1/1;
-    width: 100%;
-    border-radius: 10px;
-
-  }
+  .icon
 
   @media (min-width: 2000px) {
     .homeContainer {
       min-height: 75vh;
     }
   }
+  
   @media (min-width: 768.1px) {
     .content {
       flex-direction: row;
@@ -139,7 +250,6 @@
   
     .textContainer {
       width: 100%;
-      padding-left: 5vw;
     }
 
     .imageContainer {
@@ -151,4 +261,3 @@
   
 
   }
-  

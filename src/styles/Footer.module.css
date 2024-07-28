@@ -14,13 +14,11 @@
     animation-iteration-count: infinite;
     text-align: center;
     color: black;
-    text-shadow: 0 0 5px rgb(127, 0, 255), 0 0 10px rgb(127, 0, 255), 0 0 20px rgb(127, 0, 255), 0 0 40px rgb(127, 0, 255);
     text-transform: uppercase;
     font-weight: 500;
   }
 
 [data-theme="dark"] .heading {
-    text-shadow: 0 0 5px rgb(222, 49, 99), 0 0 10px rgb(222, 49, 99), 0 0 20px rgb(222, 49, 99), 0 0 40px rgb(222, 49, 99);
     color: white;
     animation-name: dark-text-anim;
     animation-duration: 0.1s;
@@ -30,21 +28,21 @@
 
   @keyframes text-anim {
     from {
-      text-shadow: 0 0 5px rgb(127, 0, 255), 0 0 10px rgb(127, 0, 255), 0 0 20px rgb(127, 0, 255), 0 0 40px rgb(127, 0, 255);
+      text-shadow: 0 0 5px #9e66ff, 0 0 10px #9e66ff, 0 0 20px #9e66ff, 0 0 40px #9e66ff;
       color: black
     }
     to {
-      text-shadow: 0 0 5px rgb(207, 159, 255), 0 0 10px rgb(207, 159, 255), 0 0 20px violet, 0 0 100px violet;
+      text-shadow: 0 0 5px #a388ee, 0 0 10px #a388ee, 0 0 20px violet, 0 0 100px violet;
     }
   }
 
   @keyframes dark-text-anim {
     from {
-      text-shadow: 0 0 5px rgb(222, 49, 99), 0 0 10px rgb(222, 49, 99), 0 0 20px rgb(222, 49, 99), 0 0 40px rgb(222, 49, 99);
+      text-shadow: 0 0 5px #fc7303, 0 0 10px #fc7303, 0 0 20px #fc7303, 0 0 40px #fc7303;
       color: white;
     }
     to {
-      text-shadow: 0 0 5px rgb(255, 182, 193), 0 0 10px rgb(255, 182, 193), 0 0 20px red, 0 0 100px red;
+      text-shadow: 0 0 5px #FD9745, 0 0 10px #FD9745, 0 0 20px red, 0 0 100px red;
     }
   }
   

@@ -71,14 +71,11 @@ const NavBar = () => {
         )}
       </div>
       <div className={styles.logo} onClick={() => scrollToSection('home')}>
-        <h1>Antonio Balanzategui</h1>
-        <h1>Antonio Balanzategui</h1>
+        <h1>A B</h1>
+        <h1>A B</h1>
       </div>
       <ul className={styles.menu}>
         <div className={styles.navigation}>
-          <li onClick={() => scrollToSection('about')}>
-            <a>About</a>
-          </li>
           <li onClick={() => scrollToSection('skills')}>
             <a>Skills</a>
           </li>
@@ -107,9 +104,6 @@ const NavBar = () => {
         <ListItemText primary="Home" />
       </ListItem>
       <Divider />
-      <ListItem button onClick={() => handleMenuClick('about')}>
-        <ListItemText primary="About" />
-      </ListItem>
       <Divider />
       <ListItem button onClick={() => handleMenuClick('skills')}>
         <ListItemText primary="Skills" />

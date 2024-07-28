@@ -170,13 +170,13 @@ const ContactForm = () => {
                   >
                     {isDarkMode ? (
                       <linearGradient id="gradient" gradientTransform="rotate(90)">
-                        <stop offset="0%" stopColor="rgb(222, 49, 99)" />
-                        <stop offset="100%" stopColor="rgb(255, 182, 193)" />
+                        <stop offset="0%" stopColor="#FD9745" />
+                        <stop offset="100%" stopColor="#fc7303" />
                       </linearGradient>
                     ) : (
                       <linearGradient id="gradient" gradientTransform="rotate(90)">
-                        <stop offset="0%" stopColor="rgb(127, 0, 255)" />
-                        <stop offset="100%" stopColor="rgb(207, 159, 255)" />
+                        <stop offset="0%" stopColor="#9e66ff" />
+                        <stop offset="100%" stopColor="#a388ee" />
                       </linearGradient>
                     )}
                     <Send color="url(#gradient)" />
