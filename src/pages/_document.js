@@ -1,17 +1,17 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
-      <link
-    href="https://fonts.googleapis.com/css?family=Inconsolata:400|Arvo:400|Ubuntu:400|Anton:400|&display=swap"
-    />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#0a0a0a" />
       </Head>
-      <body>
+      <body className="bg-bg text-fg">
         <Main />
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }
