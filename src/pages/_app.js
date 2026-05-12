@@ -1,35 +1,25 @@
-import React from 'react';
-import NavBar from '../components/NavBar';
-import { ThemeProvider } from '../components/ThemeContext';
-import Home from '../components/Home';
-import About from '../components/About';
-import Skills from '../components/Skills';
-import Projects from '../components/Projects';
-import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
-import AboutMe from '../components/AboutMe';
-import '../styles/Global.css';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
+import '@/styles/globals.css';
 
-const App = () => {
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+export default function App({ Component, pageProps }) {
   return (
     <ThemeProvider>
-      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
-      <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Luckiest+Guy&family=Tiny5&display=swap" rel="stylesheet"></link>
-      <div className="container">
-        <div className="backgroundGradient"></div>
-        <NavBar />
-        <div className="contentContainer">
-          <Home />
-          <AboutMe/>
-          <Skills />
-          <Projects />
-          <ContactForm/>
-          <Footer/>
-        </div>
+      <div className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
+        <Component {...pageProps} />
       </div>
     </ThemeProvider>
   );
-};
-
-export default App;
+}
