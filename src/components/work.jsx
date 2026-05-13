@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ArrowUpRight, Lock } from 'lucide-react';
 
 const featured = [
@@ -25,8 +26,9 @@ const featured = [
       'CUSUM', 'Mann-Kendall', 'MEWMA', 'Hawkes', 'Kalman/RTS',
       'PELT', 'PCA', 'Weibull', 'Schneider EBO', 'REST APIs',
     ],
-    media: {
-      placeholder: 'Redacted snippets from the quarterly investigation report — coming soon.',
+    figures: {
+      href: '/vcu-health',
+      label: 'View four figures from the report',
     },
   },
   {
@@ -170,6 +172,16 @@ function FeaturedCard({ project }) {
           <div className="mt-6 flex items-center justify-center rounded-lg border hairline border-dashed bg-bg/40 p-6 text-center font-mono text-xs text-muted">
             {project.media.placeholder}
           </div>
+        )}
+
+        {project.figures && (
+          <Link
+            href={project.figures.href}
+            className="mt-6 inline-flex items-center gap-1.5 rounded-md border hairline bg-bg/60 px-3 py-1.5 font-mono text-xs text-fg/85 transition-colors hover:text-accent hover:border-accent/40"
+          >
+            {project.figures.label}
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
         )}
 
         <div className="mt-6 flex flex-wrap gap-1.5">
