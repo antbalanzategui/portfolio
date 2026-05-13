@@ -110,7 +110,7 @@ export default function VcuHealth() {
                     width={1600}
                     height={900}
                     sizes="(min-width: 1024px) 64rem, 100vw"
-                    className="h-auto w-full"
+                    className="h-auto w-full dark:invert dark:hue-rotate-180"
                     priority={fig.index === '01'}
                   />
                 </div>
