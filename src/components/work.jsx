@@ -59,6 +59,10 @@ const featured = [
     media: {
       placeholder: 'Private repo — demo and code walkthrough available on request.',
     },
+    figures: {
+      href: '/evolutionsim',
+      label: 'Explore the four simulations',
+    },
   },
   {
     index: '03',

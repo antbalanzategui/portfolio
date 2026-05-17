@@ -57,3 +57,59 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .prose-fn {
+    @apply text-base leading-relaxed text-fg/85;
+  }
+  .prose-fn > * + * {
+    @apply mt-6;
+  }
+  .prose-fn h2 {
+    @apply mt-14 text-2xl font-medium tracking-tight text-fg;
+  }
+  .prose-fn h3 {
+    @apply mt-10 text-xl font-medium tracking-tight text-fg;
+  }
+  .prose-fn h4 {
+    @apply mt-8 text-base font-medium uppercase tracking-wider text-muted;
+    font-family: var(--font-mono);
+  }
+  .prose-fn p { @apply text-fg/85; }
+  .prose-fn a {
+    @apply text-accent underline decoration-accent/40 underline-offset-4 transition-colors;
+  }
+  .prose-fn a:hover { @apply decoration-accent; }
+  .prose-fn strong { @apply text-fg; }
+  .prose-fn em { @apply italic; }
+  .prose-fn ul, .prose-fn ol { @apply pl-6; }
+  .prose-fn ul { @apply list-disc marker:text-muted; }
+  .prose-fn ol { @apply list-decimal marker:text-muted; }
+  .prose-fn li + li { @apply mt-2; }
+  .prose-fn blockquote {
+    @apply border-l-2 pl-4 italic text-fg/75;
+    border-color: rgb(var(--accent) / 0.6);
+  }
+  .prose-fn code {
+    @apply rounded border hairline bg-surface/60 px-1.5 py-0.5 font-mono text-[0.85em] text-fg;
+  }
+  .prose-fn pre {
+    @apply overflow-x-auto rounded-lg border hairline bg-surface/40 p-4 font-mono text-sm leading-relaxed text-fg/90;
+  }
+  .prose-fn pre code {
+    @apply border-0 bg-transparent p-0 text-[0.95em];
+  }
+  .prose-fn hr {
+    @apply my-12 h-px border-0 bg-fg/10;
+  }
+  .prose-fn img {
+    @apply mx-auto rounded-lg border hairline;
+  }
+  .prose-fn table {
+    @apply w-full border-collapse text-sm;
+  }
+  .prose-fn th, .prose-fn td {
+    @apply border hairline px-3 py-2 text-left;
+  }
+  .prose-fn th { @apply bg-surface/60 font-mono text-xs uppercase tracking-wider text-muted; }
+}
