@@ -1,0 +1,134 @@
+SNOWFLAKE — snowflake_cinematic_gpu
+====================================
+
+A real-time crystallography simulation of an ice Ih stellar dendrite growing
+from a single seed at T = -15 degrees C and supersaturation sigma = 2.5%.
+Those are the conditions in the Nakaya diagram that produce classic
+six-pointed dendrites — the iconic Bentley snowflake. Every arm and
+side-branch emerges from the underlying diffusion-and-attachment physics, not
+from procedural fractals or texture work.
+
+
+THE SIMULATION, END TO END
+--------------------------
+
+The mode runs as a continuous cycle. When the crystal grows close to the grid
+boundary, a fresh seed is dropped and the loop restarts.
+
+Phase 0 — Seed. A single hex cell at the grid center is set to ice. The vapor
+field is uniform at sigma = 2.5%. Camera is tight on the seed point. Nothing
+visible yet except a faint blue glow.
+
+Phase 1 — Growth. Vapor diffuses toward the seed. Water molecules attach to
+the basal face slowly but to the prism face fast — the prism/basal anisotropy
+at -15 degrees C is what selects the plate-dendrite habit rather than columns
+or needles. Six primary arms extend outward along the prism-face directions,
+encouraged by the lattice's six-fold symmetry. The camera pulls back to
+follow.
+
+Phase 2 — Branching. Once the primary arms outrun the vapor field, they
+become diffusion-limited. Now the Mullins-Sekerka instability (1963) takes
+over: any small protrusion on the side of a primary arm reaches into
+higher-supersaturation vapor than the flat surface beside it, so it grows
+faster, amplifying itself. The result is secondary side-branches sprouting
+perpendicular to each primary arm at a characteristic wavelength set by
+surface tension and diffusion length. This is the visual signature of the
+stellar-dendrite morphology. The thumbnail captures this phase.
+
+Phase 3 — Full crystal beauty shot. Growth slows as the depletion zone around
+the crystal saturates. Side-branches develop their own tertiary branches.
+Camera does a slow orbit to show the full six-fold structure.
+
+Phase 4 — Fade/restart. Crystal is now spanning ~60% of the grid; if it
+touches the boundary, the grower resets, seeds a new crystal, and the cycle
+begins again.
+
+
+PHYSICS ENGINE — src/ice_crystal.py
+-----------------------------------
+
+  - Hexagonal lattice grid (256 x 256 cells, dx ~ 1 micrometer). Ice Ih
+    crystallizes in space group P6_3/mmc — the grid is hex-coordinated to
+    reflect that, rather than imposing six-fold symmetry on a square grid.
+
+  - Vapor diffusion (Fick's 2nd law) — supersaturation field sigma obeys
+    d_sigma/dt = D * laplacian(sigma) on the hex grid, integrated each
+    substep using the Reiter (2005) cellular scheme. D is the literature
+    value for water vapor in air.
+
+  - Hertz-Knudsen attachment kinetics — growth velocity at the interface is
+    v = alpha * v_kinetic * sigma, where v_kinetic = sqrt(k_B T / 2 pi m) is
+    the thermal impingement speed (~147 m/s at -15 degrees C) and alpha is
+    the temperature-dependent attachment coefficient. Alpha differs between
+    the basal (0001) face and the prism (10-10) face, and that anisotropy
+    ratio is what determines whether you get plates, columns, needles, or
+    dendrites — i.e., it is where the Nakaya diagram comes from.
+
+  - Diffusion-limited correction (Libbrecht 2005) — once tips outrun the
+    vapor field, kinetics-limited growth crosses over to diffusion-limited
+    growth.
+
+  - Mullins-Sekerka instability (1963) — emerges naturally from the diffusion
+    field. Not coded explicitly; it is an emergent property of the diffusion
+    + attachment system.
+
+  - Six-fold symmetry enforcement (Gravner & Griffeath 2008) — prevents
+    numerical noise from breaking the lattice-imposed sixfold symmetry over
+    long growth.
+
+  - NakayaDiagram classifies the (T, sigma) operating point against measured
+    morphology phase boundaries — at -15 degrees C, sigma = 2.5%, the
+    classification is "stellar dendrite," and the simulation produces
+    exactly that.
+
+
+RENDERING PIPELINE
+------------------
+
+  - CPU (Python + Numba) runs the diffusion-attachment grid. All hot kernels
+    (vapor step, attachment step, particle generation) are @njit-compiled
+    with cache=True, fastmath=True. Warmup at startup pre-compiles every
+    kernel against tiny dummy data so the first real frame does not stutter.
+
+  - Particle generation (also Numba-JIT'd): ice cells are collected, then
+    sampled into ~235k RGBA particles spanning six visual layers:
+
+      * Crystal body (80k) — radial gradient: white-translucent core to
+        ice-blue mid to deep saturated blue tips. Low alpha (~0.3) prevents
+        overlap from washing out to white.
+      * Interface tips (30k) — cyan glow at active crystal-vapor boundary
+        cells.
+      * Vapor field (25k) — translucent halo following the supersaturation
+        gradient.
+      * Falling snow (15k) — ambient background.
+      * Sparkles (8k) — point glints at active growth sites, modulated by
+        sin^3 for soft pulsing.
+      * Atmosphere (12k) — deep-blue background vignette.
+
+  - GPU (mmap) — particles cross via MmapSceneWriter and the renderer's
+    standard particle pipeline. No per-pixel compute shader needed for this
+    mode; it is pure scattered-point rendering through the heat-ramp glow
+    shader.
+
+  - Camera choreography is baked into the mode: tight on seed at t = 0, slow
+    pull-back through Phase 1, gentle orbit in the beauty shot.
+
+  - 61 FPS in the capture — hits the 60 FPS target with margin.
+
+
+THUMBNAIL
+---------
+frame_015.png — mid-growth six-fold dendrite showing clear primary arms with
+secondary side-branches. The Mullins-Sekerka instability signature in textbook
+form.
+
+
+COMMON THREAD (for the portfolio narrative)
+-------------------------------------------
+All three GPU cinematics share the same architecture: the CPU computes
+physics, the GPU computes pixels. A few hundred bytes of state cross the
+CPU-to-GPU boundary each frame; the GPU expands that into one to two million
+particles, or per-pixel geodesics, in a single compute dispatch. The renderer
+(Rust + wgpu, Vulkan backend) is the same one driving all 315 modes in the
+project — these three are the most visually striking because their physics
+happens to be the most photogenic.

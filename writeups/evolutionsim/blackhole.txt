@@ -1,0 +1,123 @@
+BLACK HOLE — black_hole_cinematic_gpu
+======================================
+
+A real-time, GPU-ray-traced reconstruction of M87*, the 6.5 x 10^9 solar mass
+supermassive black hole imaged by the Event Horizon Telescope in 2019. The
+scene runs as a cinematic loop viewed at the EHT's 17 degree inclination with
+spin a/M = 0.94. Every visible feature emerges from first-principles general
+relativity — nothing is painted in.
+
+
+THE SIMULATION, END TO END
+--------------------------
+
+Steady state (the persistent scene). A geometrically thin, optically thick
+accretion disk orbits between the ISCO (innermost stable circular orbit) and
+~10 R_g. The disk's signature features are all relativistic effects:
+
+  - The bright crescent is Doppler beaming — the side of the disk rotating
+    toward the camera is blueshifted and brightness-boosted by relativistic
+    motion (delta-beta ~ 0.3 at ISCO); the receding side is dimmed and
+    redshifted.
+
+  - The Einstein ring surrounding the dark shadow is the photon sphere —
+    light rays grazing R = 3 R_g loop the black hole one or more times before
+    reaching the camera.
+
+  - The secondary image visible *inside* the apparent shadow is the disk's
+    far side, bent over the top of the hole by rays deflected by pi radians.
+
+  - The dark center is the apparent shadow at 5.2 R_g — slightly D-shaped
+    because the black hole is spinning.
+
+Orbiting hot spots. Eight bright "hot spots" — small overdensities at ISCO —
+orbit at 1.5–3x ISCO radius with Keplerian frequencies. They are gravitationally
+lensed automatically by the per-pixel geodesic integration, so they appear,
+brighten, lens around the back of the hole, and reappear on the far side
+without any explicit animation.
+
+MAD eruptions (Magnetically Arrested Disk flux eruptions; Igumenshchev 2008,
+Tchekhovskoy 2011, Ripperda 2022). Stochastically launched plasma arcs erupt
+from the disk along poloidal magnetic field lines, modeled as fat red-orange
+tubes anchored at both ends. Maximum one active at a time — they are asymmetric
+by nature.
+
+Tidal Disruption Event. A gas cloud (modeled on Sgr A*'s G2 cloud, Gillessen
+2012) approaches the black hole on a parabolic orbit. Inside the tidal radius
+(~3x ISCO):
+
+  - The cloud undergoes spaghettification — differential gravity stretches it
+    along the radial direction, rendered as 24 sub-spheres tapering from a hot
+    core to long thin extremities.
+
+  - A debris stream unspools behind the disrupted star (Rees 1988), with
+    non-linear lag from differential orbital velocities: dense near the head,
+    sparse at the tail. The stream wraps around the hole and circularizes.
+
+  - The tip facing the black hole is tidally compressed and heated, glowing
+    hotter than the trailing material.
+
+  - Debris that crosses the horizon disappears; everything else is
+    gravitationally lensed by the ray-trace.
+
+Gravitational-wave grid ripple — a hidden curvature grid driven by sin-product
+waves models the spacetime distortion (an aesthetic overlay, not load-bearing
+physics).
+
+Camera choreography. Slow continuous orbit around the disk, with pitch /
+distance shaped by the cinematic phase clock. The shot starts pulled back,
+drifts inward through the MAD-eruption phase, then frames the TDE as it
+disrupts.
+
+
+PHYSICS ENGINE
+--------------
+
+  src/relativistic_physics.py — KerrBlackHole builds the full Kerr geometry
+  (outer horizon R+, ISCO via Bardeen-Press-Teukolsky, photon sphere,
+  ergosphere, Hawking temperature, Eddington luminosity) from just mass_solar
+  and spin. AccretionDisk adds the Novikov-Thorne (1973) relativistic disk
+  temperature profile. RelativisticJet handles Blandford-Znajek (1977) jet
+  power from spin extraction.
+
+  src/mad_eruptions.py — stochastic MAD eruption engine; samples eruption
+  phase, brightness, and radial extent.
+
+  Pseudo-Newtonian acceleration (Paczynski-Wiita) — a = -GM / (r - R_s)^2 —
+  drives CPU-side particle dynamics (TDE debris, hot spots). It reproduces
+  ISCO and horizon behavior without full geodesic cost per particle.
+
+
+RENDERING PIPELINE
+------------------
+
+Three GPU passes per frame:
+
+1. Per-pixel Kerr ray-trace (renderer/src/shaders/black_hole.wgsl). For every
+   screen pixel, the GPU integrates a null geodesic *backward* from the camera
+   through Kerr spacetime using RK4 integration in the equatorial plane with
+   conserved energy E and angular momentum L = b (impact parameter). Rays that
+   fall through the outer horizon return black. Rays grazing the photon sphere
+   produce the bright ring. Rays deflected ~pi give the Einstein ring and
+   secondary image. The shader handles disk emission with Doppler beaming and
+   gravitational redshift inline.
+
+2. Volume rendering of the disk's emission cube (200 x 60 x 200 grid baked
+   once at startup with an exponential radial profile and Gaussian vertical
+   falloff; density gated to clear the shadow region so glow cannot bleed
+   inside 2.6 R_g).
+
+3. Sphere/particle pipeline for hot-spots, MAD eruption plasma tubes, and TDE
+   debris. These get gravitationally lensed naturally because the ray-trace
+   handles the secondary crossing.
+
+CPU packs ~256 bytes of state per frame (orbital phases, MAD state, TDE
+position) and writes to a memory-mapped buffer; GPU reads and renders.
+60 FPS on a GTX 1660 at the captured resolution.
+
+
+THUMBNAIL
+---------
+frame_023.png — late-phase frame showing the Einstein ring, lensed accretion
+disk, tidal-disruption debris stream curving along a geodesic, and the jet
+emerging above the shadow. Most physics-rich single frame in the sequence.

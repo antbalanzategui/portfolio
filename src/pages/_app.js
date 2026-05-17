@@ -1,4 +1,5 @@
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/theme-provider';
 import '@/styles/globals.css';
 
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }) {
     <ThemeProvider>
       <div className={`${inter.variable} ${jetbrainsMono.variable} font-sans`}>
         <Component {...pageProps} />
+        <Analytics />
       </div>
     </ThemeProvider>
   );

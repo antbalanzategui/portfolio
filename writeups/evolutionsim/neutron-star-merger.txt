@@ -1,0 +1,109 @@
+NEUTRON STAR MERGER — neutron_star_merger_cinematic_gpu
+========================================================
+
+A cinematic of two ~1.4 solar mass neutron stars spiraling in via
+gravitational-wave emission, colliding, forming a hypermassive remnant, and
+exploding into a kilonova — the same event LIGO and Virgo observed as GW170817
+in August 2017. Parameters are pinned to the measured GW170817 values: chirp
+mass, jet half-angle, ejecta velocities.
+
+
+THE SIMULATION, END TO END
+--------------------------
+
+Phase 0 — Inspiral. Two compact objects on a decaying orbit. Separation
+follows the Peters (1964) inspiral solution, a(t) proportional to
+(1 - t/t_merge)^(1/4), with orbital frequency increasing as the characteristic
+gravitational-wave chirp. Expanding ring patterns visualize the h+ / h-cross
+strain pattern of quadrupole gravitational radiation, emitted steadily early
+on and accelerating into a torrent at merger. The camera holds at an
+overhead-ish angle, tightening as the stars approach.
+
+Phase 1 — Merger. The EOS-dependent tidal-disruption threshold is
+crossed. Tidal arms unspool from each star. Cores collide. A corona flash marks
+contact — a 3-frame near-whiteout followed by a fast corona expansion to ~60
+sim units. This is the optical/UV "blue precursor" the kilonova actually
+shows.
+
+Phase 2 — Post-merger. A hypermassive neutron star (HMNS) survives,
+oscillating in multiple normal modes simultaneously, all damped with realistic
+timescales from numerical-relativity simulations:
+
+  - f2 mode — the dominant 2–3 kHz post-merger gravitational-wave peak
+  - Spiral (m=1) mode — characteristic one-arm instability
+  - Quasi-radial mode — radial breathing
+  - One-arm mode — m=1 dynamical instability
+
+A short-lived accretion disk forms around the remnant with MRI-driven spiral
+density waves (magnetorotational instability) at the proper pitch angle. Twin
+relativistic jets launch along the polar axis with a helical magnetic
+structure, surrounding cocoon, ~3 degree precession period, and a luminous
+breakout core. These jets are the engine that powers the short gamma-ray
+burst.
+
+Phase 3 — Kilonova. Two-component ejecta expansion — the same two
+components observed in GW170817's optical/IR follow-up:
+
+  - Red component: dynamical ejecta, equatorial, lanthanide-rich, high opacity.
+    Thrown off during the merger itself.
+  - Blue component: wind ejecta, polar, lanthanide-poor, lower opacity. Driven
+    by neutrino winds from the disk.
+
+Both shells are heated by r-process radioactive decay — the rapid neutron
+capture nucleosynthesis that forges gold, platinum, and the actinides in real
+time. The brightness decay follows the r-process heating-rate power law
+t^(-1.3). The jets keep pushing through the expanding shell, visible as bright
+filaments piercing both poles.
+
+Phase 4 — Cycle reset. Smooth fade and re-seed; the loop restarts.
+
+Camera choreography. Overhead during inspiral, side-on for the merger, slow
+orbit during post-merger, then a slow pullback during the kilonova to frame
+the full jet + ejecta geometry.
+
+
+PHYSICS ENGINE
+--------------
+
+  - Peters-Mathews (1964) gravitational-wave inspiral.
+
+  - Chirp mass and orbital parameters taken from GW170817's measured values
+    via src/physics_constants.py (NSMERGER_CHIRP_MASS and 30+ related
+    constants).
+
+  - Multi-mode HMNS oscillation with frequencies and amplitudes from numerical
+    relativity literature (NSMERGER_HMNS_F2_FREQ_KHZ,
+    NSMERGER_HMNS_FSPIRAL_FREQ_KHZ, etc.).
+
+  - MRI spiral pitch for disk density waves.
+
+  - Two-component kilonova with separate density profiles, velocities, and
+    r-process heating decay.
+
+
+RENDERING PIPELINE
+------------------
+
+  - CPU (Python) computes orbital state, phase progress, and ~50 physics
+    parameters per frame, packing them into a 256-byte MergerParams uniform.
+
+  - GPU compute shader (renderer/src/compute/merger.wgsl) scatters 1.16 million
+    particles across 9 physical layers in a single dispatch — star cores, GW
+    rings, disk, jets, dynamical ejecta, wind ejecta, corona, tidal arms,
+    remnant glow. Each particle's position is computed procedurally from its
+    layer's distribution, using PCG hashing for deterministic randomness
+    without storing per-particle state.
+
+  - CPU mmap writes 5k ambient deep-space stars (the only layer the GPU does
+    not generate procedurally).
+
+  - 48 FPS in this capture run — slightly below the 60 FPS target. The disk
+    layer (400k of the 1.16M) is the heaviest; cutting to 800k total particles
+    would hit 60.
+
+
+THUMBNAIL
+---------
+frame_030.png — fully developed kilonova ejecta shell pierced by twin
+relativistic jets, with visible filamentary structure from r-process heating.
+The iconic LIGO-era post-merger geometry.

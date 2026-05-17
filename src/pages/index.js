@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import { SeoMeta } from '@/components/seo-meta';
 import { Nav } from '@/components/nav';
 import { Hero } from '@/components/hero';
 import { About } from '@/components/about';
@@ -10,15 +10,13 @@ import { Footer } from '@/components/footer';
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Antonio Balanzategui — Software Engineer</title>
-        <meta
-          name="description"
-          content="Software engineer working at the intersection of applied statistics, GPU physics simulation, and building-systems control."
-        />
-      </Head>
+      <SeoMeta
+        title="Antonio Balanzategui — Software Engineer"
+        description="Software engineer working at the intersection of applied statistics, GPU physics simulation, and building-systems control."
+        path="/"
+      />
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <About />
         <Work />

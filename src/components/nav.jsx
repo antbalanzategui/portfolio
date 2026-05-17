@@ -4,10 +4,12 @@ import { ThemeToggle } from './theme-toggle';
 import { cn } from '@/lib/utils';
 
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#work', label: 'Work' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#work', label: 'Work' },
+  { href: '/case-studies', label: 'Case Studies' },
+  { href: '/field-notes', label: 'Field Notes' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export function Nav() {

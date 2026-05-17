@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
+import { SeoMeta } from '@/components/seo-meta';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Footer } from '@/components/footer';
 
@@ -43,13 +43,12 @@ const figures = [
 export default function VcuHealth() {
   return (
     <>
-      <Head>
-        <title>VCU Health BAS Investigation — Antonio Balanzategui</title>
-        <meta
-          name="description"
-          content="Four redacted figures from the quarterly BAS investigation report: CUSUM change-point, fan speed vs. room pressure, sensor staleness heatmap, and MEWMA Hotelling T²."
-        />
-      </Head>
+      <SeoMeta
+        title="VCU Health BAS Investigation"
+        description="Four redacted figures from the quarterly BAS investigation report: CUSUM change-point, fan speed vs. room pressure, sensor staleness heatmap, and MEWMA Hotelling T²."
+        path="/vcu-health"
+        ogImage="/01-cusum-change-point.png"
+      />
 
       <header className="fixed inset-x-0 top-0 z-50 border-b hairline bg-bg/70 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
@@ -64,11 +63,11 @@ export default function VcuHealth() {
         </div>
       </header>
 
-      <main className="pt-14">
+      <main id="main" className="pt-14">
         <section className="border-b hairline py-16">
           <div className="mx-auto max-w-5xl px-6">
             <div className="font-mono text-xs uppercase tracking-widest text-muted">
-              Case study · VCU Health · BAS Programmer
+              Project writeup · VCU Health · BAS Programmer
             </div>
             <h1 className="mt-3 text-3xl font-medium tracking-tight text-fg sm:text-4xl md:text-5xl">
               Four figures from the quarterly investigation
