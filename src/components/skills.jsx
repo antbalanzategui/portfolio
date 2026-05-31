@@ -45,7 +45,7 @@ export function Skills() {
               03 / Skills
             </div>
             <h2 className="mt-2 text-3xl font-medium tracking-tight sm:text-4xl">
-              Tools &amp; methods
+              Tools &amp; Methods
             </h2>
           </div>
         </div>
