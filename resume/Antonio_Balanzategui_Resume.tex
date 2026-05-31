@@ -1,0 +1,166 @@
+%-------------------------------------------------------------------------------
+% Antonio Balanzategui - Resume
+% ATS-friendly single-column LaTeX template.
+% Compile with: pdflatex Antonio_Balanzategui_Resume.tex
+%-------------------------------------------------------------------------------
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.55in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{parskip}
+
+% Plain hyperlinks (ATS-safe: no colored boxes around URLs)
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black,
+  pdftitle={Antonio Balanzategui - Resume},
+  pdfauthor={Antonio Balanzategui}
+}
+
+% Tight, ATS-friendly section formatting
+\titleformat{\section}
+  {\large\bfseries\MakeUppercase}
+  {}
+  {0pt}
+  {}
+  [\vspace{-2pt}\hrule\vspace{2pt}]
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+
+% Compact itemize for bullets (asterisks render cleanly across ATS)
+\setlist[itemize]{
+  leftmargin=1.2em,
+  itemsep=1pt,
+  parsep=0pt,
+  topsep=2pt,
+  label=$\bullet$
+}
+
+\setlength{\parindent}{0pt}
+\pagenumbering{gobble}
+
+% Subheader macros (job title + employer/period)
+\newcommand{\role}[4]{%
+  \noindent\textbf{#1} \hfill #3 \\[1pt]
+  \textit{#2} \hfill \textit{#4} \\[2pt]
+}
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% HEADER
+%-------------------------------------------------------------------------------
+\begin{center}
+  {\LARGE \textbf{Antonio Balanzategui}}\\[3pt]
+  Richmond, VA 23235 \textbar{} (804) 332-9563 \textbar{}
+  \href{mailto:antbalanzategui@vt.edu}{antbalanzategui@vt.edu}\\[1pt]
+  \href{https://linkedin.com/in/antbalanzategui}{linkedin.com/in/antbalanzategui} \textbar{}
+  \href{https://github.com/antbalanzategui}{github.com/antbalanzategui} \textbar{}
+  \href{https://antoniobalanzategui.vercel.app}{antoniobalanzategui.vercel.app}
+\end{center}
+
+%-------------------------------------------------------------------------------
+% HEADLINE (compact 2-line summary; reframes the BAS title)
+%-------------------------------------------------------------------------------
+\vspace{2pt}
+{\small\itshape Software engineer working at the intersection of applied statistics and GPU scientific computing. Production change-point detection and predictive maintenance on industrial sensor data; off-hours building a real-time 2.4M-cell GPU thunderstorm simulator.}
+\vspace{2pt}
+
+%-------------------------------------------------------------------------------
+% EXPERIENCE
+%-------------------------------------------------------------------------------
+\section{Experience}
+
+\role
+  {Building Automation System (BAS) Programmer -- Applied Statistics \& Predictive Maintenance}
+  {Engineered Services, Inc. (contracted to VCU Health)}
+  {Jan 2026 -- Present}
+  {Richmond, VA}
+
+\begin{itemize}
+  \item Initial February statistical analysis correctly predicted a mechanical change-point from BAS sensor data alone (CUSUM, Mann-Kendall); validated three months later when the EF1 exhaust fan failed catastrophically on March 19, 2026. VCU Health Pharmacy regulatory compliance leadership formally requested quarterly investigations going forward.
+  \item Built and maintain an automated Python pipeline ingesting 10+ months of BAS trend-log data across 12 sensor channels -- CUSUM, Mann-Kendall, MEWMA Hotelling T-squared, PCA, Hawkes self-exciting processes, Kalman (RTS) smoothing, Weibull survival, PELT change-point detection -- generating the full quarterly investigation end-to-end and replacing manual analysis.
+  \item Decoded Schneider EBO/Continuum RTU control programs from XML export, identifying a disabled proportional humidity reset and a hardcoded exhaust-fan loop bypassing the configured PID -- both root causes of ongoing USP 797/800 compliance drift not visible from sensor data alone.
+  \item Diagnosed a BAS historian stale-data cascade (Hawkes branching ratio n* = 0.973, near-critical) affecting all 12 sensor channels; traced it to an ExTL buffer / Maximum Transfer Interval mismatch and implemented a configuration fix that reduced worst-case data staleness from 24 hours to 1 hour (96\% reduction).
+  \item Built a MaintainX-to-Freshdesk ticket migration tool using both vendors' REST APIs, automating a re-keying workflow that previously consumed an estimated week of manual work across a 7-person team for hundreds of tickets.
+\end{itemize}
+
+\role
+  {Undergraduate Teaching Assistant, Introduction to GUI Programming}
+  {Virginia Tech, Department of Computer Science}
+  {Aug 2024 -- May 2025}
+  {Blacksburg, VA}
+
+\begin{itemize}
+  \item Supported 100+ students through object-oriented design, event-driven programming, GUI architecture (layout managers, event listeners, design patterns), and the mathematics underpinning 2D graphics; held weekly office hours and graded projects.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% PROJECTS
+%-------------------------------------------------------------------------------
+\section{Projects}
+
+\role
+  {EvolutionSim -- Real-Time Multi-Cell Thunderstorm Simulator}
+  {Personal research project (private repo; demo and code walkthrough available on request)}
+  {2025 -- Present}
+  {}
+
+\begin{itemize}
+  \item Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and a gauge-invariant Dielectric Breakdown Model (Herrera et al. 2025) on a unified 2.4M-cell GPU fluid grid (Rust + wgpu + WGSL, ~4,600 LoC of compute shaders). Part of a broader ~330K-line platform (Python + Rust) spanning 14 foundation physics modules and 333+ simulation modes.
+  \item Incompressible Navier-Stokes core: Boussinesq buoyancy, Chorin projection, MacCormack semi-Lagrangian advection, Jacobi pressure solve, vorticity confinement; implements schemes from Stam (1999), Selle et al. (2008), and Fedkiw-Stam-Jensen (2001).
+  \item 13K-line Python physics layer (12 modules) drives the GPU; verified numerically against published constants -- Heidler return-stroke peak current 29,956 A vs 30,000 A target, breakdown field within 1\% per Marshall et al. 1995, gauge invariance and charge conservation verified to floating-point. 124K-line pytest suite covers the broader platform.
+\end{itemize}
+
+\role
+  {De Novo Protein Folding Simulation}
+  {CS 4414 (Issues in Scientific Computing), Virginia Tech; team of 4}
+  {Spring 2025}
+  {}
+
+\begin{itemize}
+  \item Predicted the native structure of a 21-residue peptide (Protein T: NLYIQWLKDGGPSSGRPPPS) from sequence alone -- without ML or structural databases -- using four custom simulated-annealing protocols in AMBER (Langevin dynamics, generalized-Born implicit solvent); cyclic MSA-MD produced the lowest-energy conformation at -512.26 kcal/mol. \textbf{Awarded 2nd Place, VTURCS Undergraduate Research Symposium.}
+  \item Benchmarked five optimization methods (Differential Evolution, Simulated Annealing, Nelder-Mead, Newton's, Steepest Descent) on custom 1D/2D folding-funnel test functions; identified stochastic methods as substantially more reliable on rugged energy landscapes.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% EDUCATION
+%-------------------------------------------------------------------------------
+\section{Education}
+
+\role
+  {Bachelor of Science, Computer Science}
+  {Virginia Tech, Blacksburg, VA}
+  {May 2025}
+  {}
+
+\vspace{-4pt}
+\begin{itemize}
+  \item GPA: 3.3 \textbar{} Marvin L. and Leila W. Pollard Scholarship.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% SKILLS (expanded — pulls keywords out of the body so ATS sees them)
+%-------------------------------------------------------------------------------
+\section{Skills}
+
+\textbf{Programming Languages:} Python, Rust, C++, Java, JavaScript, TypeScript, SQL, C, R, MATLAB; Spanish (proficient).
+
+\textbf{Statistics \& Time Series:} Change-point detection (CUSUM, PELT, Mann-Kendall), multivariate process control (MEWMA Hotelling T-squared), Hawkes self-exciting processes, Kalman/RTS smoothing, Weibull survival analysis, PCA, anomaly detection, statistical modeling.
+
+\textbf{Scientific Computing \& Physics:} Computational fluid dynamics (incompressible Navier-Stokes, Boussinesq buoyancy, Chorin projection, MacCormack advection, Jacobi pressure solve, vorticity confinement), molecular dynamics (AMBER, Langevin dynamics, generalized-Born implicit solvent), microphysics, plasma electrification, numerical optimization (simulated annealing, differential evolution, Nelder-Mead, Newton's method), numerical analysis.
+
+\textbf{GPU \& Graphics:} wgpu, WGSL, compute shaders, GPU-accelerated simulation, real-time rendering.
+
+\textbf{ML \& Data:} NumPy, SciPy, pandas, scikit-learn, Jupyter, data pipelines, feature engineering.
+
+\textbf{Software \& Systems:} pytest, REST API integration, Docker, Linux, Git, PostgreSQL, MongoDB, Node.js, Express, React, LaTeX.
+
+\textbf{Building Automation \& Industrial Control:} Schneider EBO, EcoStruxure, Continuum, BAS trend-log analysis, control loop analysis, industrial sensor data, predictive maintenance.
+
+\end{document}
