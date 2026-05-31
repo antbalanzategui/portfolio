@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Antonio Balanzategui — Resume</title>
+<style>
+  @page {
+    size: Letter;
+    margin: 0.35in 0.5in;
+  }
+  :root {
+    --fg: #000;
+    --muted: #222;
+    --rule: #000;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--fg);
+    background: #fff;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 9.5pt;
+    line-height: 1.18;
+    font-variant-ligatures: none;
+    -webkit-font-variant-ligatures: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 4pt;
+  }
+  .name {
+    font-size: 18pt;
+    font-weight: bold;
+    letter-spacing: 0.3pt;
+    margin-bottom: 1pt;
+  }
+  .contact {
+    font-size: 9.5pt;
+    line-height: 1.3;
+  }
+  .contact .sep {
+    margin: 0 3pt;
+    color: var(--muted);
+  }
+  .headline {
+    font-style: italic;
+    font-size: 9.5pt;
+    margin: 3pt 0 4pt 0;
+    text-align: justify;
+    line-height: 1.25;
+  }
+  h2.section {
+    font-size: 10.5pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.4pt;
+    margin: 3pt 0 0 0;
+    border-bottom: 0.6pt solid var(--rule);
+    padding-bottom: 0;
+  }
+  .role {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 3pt;
+  }
+  .role .lhs { font-weight: bold; }
+  .role .rhs { white-space: nowrap; }
+  .subrole {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-style: italic;
+    color: var(--muted);
+    margin: 0 0 1pt 0;
+  }
+  ul {
+    margin: 1pt 0 2pt 0;
+    padding-left: 1em;
+    list-style-type: disc;
+  }
+  ul li {
+    margin: 0 0 1pt 0;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .skills p {
+    margin: 0 0 1pt 0;
+    text-align: justify;
+  }
+  .skills .label {
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="name">Antonio Balanzategui</div>
+  <div class="contact">
+    Richmond, VA 23235<span class="sep">|</span>(804) 332-9563<span class="sep">|</span><a href="mailto:antbalanzategui@vt.edu">antbalanzategui@vt.edu</a><br/>
+    <a href="https://linkedin.com/in/antbalanzategui">linkedin.com/in/antbalanzategui</a><span class="sep">|</span><a href="https://github.com/antbalanzategui">github.com/antbalanzategui</a><span class="sep">|</span><a href="https://antoniobalanzategui.vercel.app">antoniobalanzategui.vercel.app</a>
+  </div>
+</div>
+
+<h2 class="section">Experience</h2>
+
+<div class="role">
+  <span class="lhs">Building Automation System (BAS) Programmer &mdash; Applied Statistics &amp; Predictive Maintenance</span>
+  <span class="rhs">Jan 2026 &ndash; Present</span>
+</div>
+<div class="subrole">
+  <span>Engineered Services, Inc. (contracted to VCU Health)</span>
+  <span>Richmond, VA</span>
+</div>
+<ul>
+  <li>Initial February statistical analysis correctly predicted a mechanical change-point from BAS sensor data alone (CUSUM, Mann-Kendall); validated three months later when the EF1 exhaust fan failed catastrophically on March 19, 2026. VCU Health Pharmacy regulatory compliance leadership formally requested quarterly investigations going forward.</li>
+  <li>Built and maintain an automated Python pipeline ingesting 10+ months of BAS trend-log data across 12 sensor channels &mdash; CUSUM, Mann-Kendall, MEWMA Hotelling T-squared, PCA, Hawkes self-exciting processes, Kalman (RTS) smoothing, Weibull survival, PELT change-point detection &mdash; generating the full quarterly investigation end-to-end and replacing manual analysis.</li>
+  <li>Decoded Schneider EBO/Continuum RTU control programs from XML export, identifying a disabled proportional humidity reset and a hardcoded exhaust-fan loop bypassing the configured PID &mdash; both root causes of ongoing USP 797/800 compliance drift not visible from sensor data alone.</li>
+  <li>Diagnosed a BAS historian stale-data cascade (Hawkes branching ratio n* = 0.973, near-critical) affecting all 12 sensor channels; traced it to an ExTL buffer / Maximum Transfer Interval mismatch and implemented a configuration fix that reduced worst-case data staleness from 24 hours to 1 hour (96% reduction).</li>
+  <li>Built a MaintainX-to-Freshdesk ticket migration tool using both vendors&rsquo; REST APIs, automating a re-keying workflow that previously consumed an estimated week of manual work across a 7-person team for hundreds of tickets.</li>
+</ul>
+
+<div class="role">
+  <span class="lhs">Undergraduate Teaching Assistant, Introduction to GUI Programming</span>
+  <span class="rhs">Aug 2024 &ndash; May 2025</span>
+</div>
+<div class="subrole">
+  <span>Virginia Tech, Department of Computer Science</span>
+  <span>Blacksburg, VA</span>
+</div>
+<ul>
+  <li>Supported 100+ students through object-oriented design, event-driven programming, GUI architecture (layout managers, event listeners, design patterns), and the mathematics underpinning 2D graphics; held weekly office hours and graded projects.</li>
+</ul>
+
+<h2 class="section">Projects</h2>
+
+<div class="role">
+  <span class="lhs">EvolutionSim &mdash; Real-Time Multi-Cell Thunderstorm Simulator</span>
+  <span class="rhs">2025 &ndash; Present</span>
+</div>
+<div class="subrole">
+  <span>Personal research project (private repo; demo and code walkthrough available on request)</span>
+  <span></span>
+</div>
+<ul>
+  <li>Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and a gauge-invariant Dielectric Breakdown Model (Herrera et al. 2025) on a unified 2.4M-cell GPU fluid grid (Rust + wgpu + WGSL, ~4,600 LoC of compute shaders). Part of a broader ~330K-line platform (Python + Rust) spanning 14 foundation physics modules and 333+ simulation modes.</li>
+  <li>Incompressible Navier-Stokes core: Boussinesq buoyancy, Chorin projection, MacCormack semi-Lagrangian advection, Jacobi pressure solve, vorticity confinement; implements schemes from Stam (1999), Selle et al. (2008), and Fedkiw-Stam-Jensen (2001).</li>
+  <li>13K-line Python physics layer (12 modules) drives the GPU; verified numerically against published constants &mdash; Heidler return-stroke peak current 29,956 A vs 30,000 A target, breakdown field within 1% per Marshall et al. 1995, gauge invariance and charge conservation verified to floating-point. 124K-line pytest suite covers the broader platform.</li>
+</ul>
+
+<div class="role">
+  <span class="lhs">De Novo Protein Folding Simulation</span>
+  <span class="rhs">Spring 2025</span>
+</div>
+<div class="subrole">
+  <span>CS 4414 (Issues in Scientific Computing), Virginia Tech; team of 4</span>
+  <span></span>
+</div>
+<ul>
+  <li>Predicted the native structure of a 21-residue peptide (Protein T: NLYIQWLKDGGPSSGRPPPS) from sequence alone &mdash; without ML or structural databases &mdash; using four custom simulated-annealing protocols in AMBER (Langevin dynamics, generalized-Born implicit solvent); cyclic MSA-MD produced the lowest-energy conformation at -512.26 kcal/mol. <strong>Awarded 2nd Place, VTURCS Undergraduate Research Symposium.</strong></li>
+  <li>Benchmarked five optimization methods (Differential Evolution, Simulated Annealing, Nelder-Mead, Newton&rsquo;s, Steepest Descent) on custom 1D/2D folding-funnel test functions; identified stochastic methods as substantially more reliable on rugged energy landscapes.</li>
+</ul>
+
+<h2 class="section">Education</h2>
+
+<div class="role">
+  <span class="lhs">Bachelor of Science, Computer Science</span>
+  <span class="rhs">May 2025</span>
+</div>
+<div class="subrole">
+  <span>Virginia Tech, Blacksburg, VA</span>
+  <span></span>
+</div>
+<ul>
+  <li>GPA: 3.3 &nbsp;|&nbsp; Marvin L. and Leila W. Pollard Scholarship.</li>
+</ul>
+
+<h2 class="section">Skills</h2>
+
+<div class="skills">
+  <p><span class="label">Languages:</span> Python, Rust, C++, Java, JavaScript, TypeScript, SQL, C, R, MATLAB; Spanish (proficient).</p>
+  <p><span class="label">Statistics &amp; Time Series:</span> CUSUM, PELT, Mann-Kendall, MEWMA Hotelling T-squared, Hawkes processes, Kalman/RTS smoothing, Weibull survival, PCA, anomaly detection.</p>
+  <p><span class="label">Scientific Computing &amp; Physics:</span> Navier-Stokes (Boussinesq, Chorin, MacCormack, Jacobi, vorticity confinement), molecular dynamics (AMBER, Langevin, generalized-Born), microphysics, plasma electrification, numerical optimization (simulated annealing, differential evolution, Nelder-Mead, Newton).</p>
+  <p><span class="label">GPU &amp; Graphics:</span> wgpu, WGSL, compute shaders, GPU-accelerated simulation, real-time rendering.</p>
+  <p><span class="label">ML &amp; Data:</span> NumPy, SciPy, pandas, scikit-learn, matplotlib, Jupyter, data pipelines, feature engineering.</p>
+  <p><span class="label">Software &amp; Systems:</span> pytest, REST APIs, Docker, Linux, Git, PostgreSQL, MongoDB, Node.js, Express, React, LaTeX.</p>
+  <p><span class="label">BAS &amp; Industrial Control:</span> EcoStruxure, Schneider AS-P / AS-B, Andover Continuum, BACnet/IP, BACnet MSTP, predictive maintenance.</p>
+</div>
+
+</body>
+</html>
