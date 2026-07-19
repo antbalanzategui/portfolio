@@ -105,6 +105,25 @@
   .prose-fn img {
     @apply mx-auto rounded-lg border hairline;
   }
+  /* Dark/light figure swap for paired light/_dark.png assets emitted by content.js */
+  .prose-fn .fig {
+    @apply my-10 flex flex-col items-center;
+  }
+  .prose-fn .fig .fig-img {
+    @apply mx-auto h-auto w-full max-w-3xl rounded-lg border hairline bg-bg/30;
+  }
+  .prose-fn .fig .fig-img--light { @apply block; }
+  .prose-fn .fig .fig-img--dark { @apply hidden; }
+  .dark .prose-fn .fig .fig-img--light { @apply hidden; }
+  .dark .prose-fn .fig .fig-img--dark { @apply block; }
+  .prose-fn .fig .fig-caption {
+    @apply mt-3 max-w-2xl text-center font-mono text-xs leading-relaxed text-muted;
+  }
+  /* KaTeX equation blocks */
+  .prose-fn .katex-display {
+    @apply my-6 overflow-x-auto overflow-y-hidden;
+  }
+  .prose-fn .katex { @apply text-[1.02em]; }
   .prose-fn table {
     @apply w-full border-collapse text-sm;
   }

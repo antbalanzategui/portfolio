@@ -1,6 +1,7 @@
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/theme-provider';
+import 'katex/dist/katex.min.css';
 import '@/styles/globals.css';
 
 const inter = Inter({
