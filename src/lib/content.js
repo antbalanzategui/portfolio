@@ -20,6 +20,17 @@ function configureMarked() {
   );
 
   const renderer = {
+    code(codeOrToken, infostring) {
+      const isToken = codeOrToken !== null && typeof codeOrToken === 'object';
+      const text = isToken ? codeOrToken.text : codeOrToken;
+      const lang = (isToken ? codeOrToken.lang : infostring) || '';
+      const language = String(lang).split(/\s+/)[0];
+      if (language === 'mermaid') {
+        return `<pre class="mermaid" data-mermaid-src="${escapeAttr(text)}">${escapeHtml(text)}</pre>`;
+      }
+      const langClass = language ? ` class="language-${escapeAttr(language)}"` : '';
+      return `<pre><code${langClass}>${escapeHtml(text)}\n</code></pre>`;
+    },
     image(hrefOrToken, titleArg, textArg) {
       const isToken = hrefOrToken !== null && typeof hrefOrToken === 'object';
       const src = isToken ? hrefOrToken.href : hrefOrToken;
@@ -46,6 +57,15 @@ function configureMarked() {
   };
 
   marked.use({ renderer });
+}
+
+export function renderPostHtml(content) {
+  configureMarked();
+  let html = marked.parse(content);
+  // Marked wraps standalone images in <p>; the figure renderer emits a block
+  // <figure>, so unwrap the surrounding paragraph to keep the HTML valid.
+  html = html.replace(/<p>(\s*<figure class="fig">[\s\S]*?<\/figure>\s*)<\/p>/g, '$1');
+  return html;
 }
 
 function escapeAttr(s) {
@@ -91,11 +111,7 @@ export function getEntryBySlug(relDir, slug) {
   const raw = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(raw);
 
-  configureMarked();
-  let html = marked.parse(content);
-  // Marked wraps standalone images in <p>; the figure renderer emits a block
-  // <figure>, so unwrap the surrounding paragraph to keep the HTML valid.
-  html = html.replace(/<p>(\s*<figure class="fig">[\s\S]*?<\/figure>\s*)<\/p>/g, '$1');
+  const html = renderPostHtml(content);
 
   const wordCount = content.split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(wordCount / 220));

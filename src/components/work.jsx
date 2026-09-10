@@ -39,21 +39,21 @@ const featured = [
     tagline:
       'A coupled fluid-dynamics, microphysics, and lightning electrification simulator on the GPU.',
     body: [
-      'Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and a gauge-invariant Dielectric Breakdown Model (Herrera et al. 2025) on a unified 2.4M-cell GPU fluid grid.',
+      'Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and field-directed bidirectional stepped leaders typed by where each channel terminates, on a unified 5.3M-cell GPU fluid grid.',
       'Incompressible Navier–Stokes core: Boussinesq buoyancy, Chorin projection, MacCormack semi-Lagrangian advection, Jacobi pressure solve, vorticity confinement. Schemes from Stam (1999), Selle et al. (2008), Fedkiw–Stam–Jensen (2001).',
-      '13K-line Python physics layer drives the GPU, verified numerically against published constants — Heidler return-stroke peak current 29,956 A vs 30,000 A target; breakdown field within 1% per Marshall et al. 1995; gauge invariance and charge conservation verified to floating-point. The broader platform is ~330K LoC across Python and Rust, 14 foundation physics modules, 333+ simulation modes, with a 124K-line pytest suite.',
+      '13K-line Python physics layer drives the GPU, verified numerically against published constants — Heidler return-stroke peak current 29,956 A vs 30,000 A target; breakdown field within 1% per Marshall et al. 1995; gauge invariance and charge conservation verified to floating-point. The broader platform spans ~130 `@compute` entry points across 50 WGSL shader files and 14 foundation physics modules, exposing 371 simulation modes, with a 9,728-test pytest suite.',
     ],
     metrics: [
-      ['2.4M', 'Cells in the unified GPU fluid grid'],
-      ['~4,600', 'LoC of WGSL compute shaders'],
-      ['333+', 'Simulation modes'],
+      ['5.3M', 'Cells in the unified GPU fluid grid'],
+      ['~130', '@compute kernels across 50 WGSL files'],
+      ['371', 'Simulation modes'],
       ['<1%', 'Deviation from published constants'],
     ],
     stack: [
       'Rust', 'wgpu', 'WGSL', 'Python',
       'Navier–Stokes', 'Boussinesq', 'MacCormack',
       'Thompson microphysics', 'Takahashi electrification',
-      'DBM', 'pytest',
+      'Stepped leaders', 'pytest',
     ],
     private: true,
     media: {

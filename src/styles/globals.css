@@ -99,6 +99,13 @@
   .prose-fn pre code {
     @apply border-0 bg-transparent p-0 text-[0.95em];
   }
+  /* Rendered mermaid diagrams sit as a centered figure, not a code box */
+  .prose-fn pre.mermaid {
+    @apply my-10 flex justify-center overflow-x-auto border-0 bg-transparent p-0 leading-normal;
+  }
+  .prose-fn pre.mermaid svg {
+    @apply mx-auto h-auto max-w-full;
+  }
   .prose-fn hr {
     @apply my-12 h-px border-0 bg-fg/10;
   }

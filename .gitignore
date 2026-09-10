@@ -36,6 +36,10 @@ yarn-error.log*
 /public/dalton.pdf
 /public/dalton*.pdf
 
+# website asset bundle — staging material, not site source
+/website_assets_extracted/
+/website_assets_*.zip
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

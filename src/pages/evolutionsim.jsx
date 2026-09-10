@@ -9,6 +9,31 @@ import { useReducedMotion } from '@/lib/use-reduced-motion';
 
 const sims = [
   {
+    slug: 'storm-engine',
+    title: 'The Storm Engine',
+    tagline: 'The storm is not drawn — it is solved. Five-stage moist-convection pipeline, CPU/GPU hybrid, checked against a double-precision oracle.',
+    image: '/figs/engine/fig_schematic_v2_dark.png',
+  },
+  {
+    slug: 'cumulus-congestus',
+    title: 'Cumulus Congestus',
+    tagline: 'Towering cumulus grown from one sounding — the tower, the cap, and the flip to taller-than-wide all emerge.',
+    image: '/figs/congestus/01_congestus_regime.png',
+    video: '/evolutionsim/congestus_showcase.mp4',
+  },
+  {
+    slug: 'dodge-city',
+    title: 'Dodge City',
+    tagline: 'A 26 May 2024 weather-balloon sounding in, a giant-hail supercell out — depth, intensity and lightning, none of it dialled in.',
+    image: '/figs/kddc/01_hero_kddc.png',
+  },
+  {
+    slug: 'chasing-a-dead-lightning-bolt',
+    title: 'Chasing a Dead Lightning Bolt',
+    tagline: 'A storm stopped throwing cloud-to-ground lightning. The bug was a one-line multigrid alias; the real fix was the domain geometry.',
+    image: '/figs/hybrid_cg/fig1_headline_iccg_dark.png',
+  },
+  {
     slug: 'blackhole',
     title: 'Black Hole',
     tagline: 'GPU-ray-traced M87*, with MAD eruptions and a live tidal-disruption event.',
@@ -21,13 +46,6 @@ const sims = [
     tagline: 'GW170817 from inspiral through two-component kilonova.',
     image: '/neutron_star_merger_thumbnail.png',
     video: '/evolutionsim/neutron-star-merger.mp4',
-  },
-  {
-    slug: 'lightning',
-    title: 'Lightning',
-    tagline: 'Takahashi electrification coupled to a gauge-invariant DBM.',
-    image: '/evolutionsim/lightning.jpg',
-    video: '/evolutionsim/lightning.mp4',
   },
   {
     slug: 'snowflake',
@@ -120,7 +138,7 @@ export default function EvolutionSim() {
               Project writeup · EvolutionSim · Personal research project
             </div>
             <h1 className="mt-3 text-3xl font-medium tracking-tight text-fg sm:text-4xl md:text-5xl">
-              A GPU physics platform with four sub-simulations
+              A GPU physics platform, several simulations
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-fg/80">
               EvolutionSim is a Rust + wgpu compute platform with a Python physics
@@ -159,7 +177,7 @@ export default function EvolutionSim() {
                   Simulations
                 </div>
                 <h2 className="mt-2 text-2xl font-medium tracking-tight sm:text-3xl">
-                  Four regimes, one engine
+                  The storm engine, and more
                 </h2>
               </div>
               <p className="hidden max-w-sm text-sm text-muted md:block">

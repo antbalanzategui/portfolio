@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { ArrowLeft, ArrowRight, Lock } from 'lucide-react';
 import { SeoMeta } from '@/components/seo-meta';
 import { ReadingProgress } from '@/components/reading-progress';
@@ -48,6 +49,42 @@ function HeroMedia({ src, alt, slug, video }) {
   );
 }
 
+// Render any ```mermaid fences the post body carries. The markdown renderer emits
+// them as <pre class="mermaid" data-mermaid-src="…">; mermaid is loaded lazily only
+// when such a node exists, and re-run on theme change so the diagram matches light/dark.
+function useMermaid(bodyHtml) {
+  const { resolvedTheme } = useTheme();
+  useEffect(() => {
+    const nodes = Array.from(document.querySelectorAll('pre.mermaid'));
+    if (nodes.length === 0) return;
+    let cancelled = false;
+    (async () => {
+      const mermaid = (await import('mermaid')).default;
+      if (cancelled) return;
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'loose',
+        theme: resolvedTheme === 'dark' ? 'dark' : 'neutral',
+      });
+      for (const el of nodes) {
+        const src = el.getAttribute('data-mermaid-src');
+        if (src != null) {
+          el.removeAttribute('data-processed');
+          el.textContent = src;
+        }
+      }
+      try {
+        await mermaid.run({ nodes });
+      } catch {
+        // On a parse/render failure, leave the source text visible rather than blank.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [bodyHtml, resolvedTheme]);
+}
+
 export function SimPage({
   slug,
   title,
@@ -62,6 +99,7 @@ export function SimPage({
   prev,
   next,
 }) {
+  useMermaid(bodyHtml);
   return (
     <>
       <SeoMeta
