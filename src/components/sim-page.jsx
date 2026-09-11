@@ -8,8 +8,9 @@ import { ReadingProgress } from '@/components/reading-progress';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Footer } from '@/components/footer';
 import { useReducedMotion } from '@/lib/use-reduced-motion';
+import { darkVariant } from '@/lib/utils';
 
-function HeroMedia({ src, alt, slug, video }) {
+function HeroMedia({ src, alt, slug, video, fit }) {
   const reducedMotion = useReducedMotion();
   const [videoOk, setVideoOk] = useState(Boolean(video));
   const [imgOk, setImgOk] = useState(true);
@@ -29,15 +30,28 @@ function HeroMedia({ src, alt, slug, video }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : imgOk ? (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(min-width: 1024px) 64rem, 100vw"
-          className="object-cover"
-          priority
-          onError={() => setImgOk(false)}
-        />
+        <>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            unoptimized
+            sizes="(min-width: 1024px) 64rem, 100vw"
+            className={`block dark:hidden ${fit === 'contain' ? 'object-contain p-3' : 'object-cover'}`}
+            priority
+            onError={() => setImgOk(false)}
+          />
+          <Image
+            src={darkVariant(src)}
+            alt={alt}
+            fill
+            unoptimized
+            sizes="(min-width: 1024px) 64rem, 100vw"
+            className={`hidden dark:block ${fit === 'contain' ? 'object-contain p-3' : 'object-cover'}`}
+            priority
+            onError={() => setImgOk(false)}
+          />
+        </>
       ) : (
         <div className="dotgrid absolute inset-0 flex items-center justify-center opacity-60">
           <span className="rounded-md border hairline bg-bg/70 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-muted">
@@ -93,6 +107,7 @@ export function SimPage({
   bodyHtml,
   image,
   imageAlt,
+  imageFit,
   video,
   tags = [],
   notes = [],
@@ -167,6 +182,7 @@ export function SimPage({
               alt={imageAlt || `${title} preview`}
               slug={slug}
               video={video}
+              fit={imageFit}
             />
 
             {description && (

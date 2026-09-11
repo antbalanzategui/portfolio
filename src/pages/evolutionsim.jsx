@@ -6,13 +6,15 @@ import { SeoMeta } from '@/components/seo-meta';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Footer } from '@/components/footer';
 import { useReducedMotion } from '@/lib/use-reduced-motion';
+import { darkVariant } from '@/lib/utils';
 
 const sims = [
   {
     slug: 'storm-engine',
     title: 'The Storm Engine',
     tagline: 'The storm is not drawn — it is solved. Five-stage moist-convection pipeline, CPU/GPU hybrid, checked against a double-precision oracle.',
-    image: '/figs/engine/fig_schematic_v2_dark.png',
+    image: '/figs/engine/fig_schematic_v2.png',
+    fit: 'contain',
   },
   {
     slug: 'cumulus-congestus',
@@ -25,13 +27,14 @@ const sims = [
     slug: 'dodge-city',
     title: 'Dodge City',
     tagline: 'A 26 May 2024 weather-balloon sounding in, a giant-hail supercell out — depth, intensity and lightning, none of it dialled in.',
-    image: '/figs/kddc/01_hero_kddc.png',
+    image: '/figs/kddc/03_flash_constellation.png',
   },
   {
     slug: 'chasing-a-dead-lightning-bolt',
     title: 'Chasing a Dead Lightning Bolt',
     tagline: 'A storm stopped throwing cloud-to-ground lightning. The bug was a one-line multigrid alias; the real fix was the domain geometry.',
-    image: '/figs/hybrid_cg/fig1_headline_iccg_dark.png',
+    image: '/figs/hybrid_cg/fig1_headline_iccg.png',
+    fit: 'contain',
   },
   {
     slug: 'blackhole',
@@ -79,14 +82,32 @@ function SimCard({ sim }) {
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />
         ) : imgOk ? (
-          <Image
-            src={sim.image}
-            alt={`${sim.title} simulation preview`}
-            fill
-            sizes="(min-width: 1024px) 32rem, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-            onError={() => setImgOk(false)}
-          />
+          (() => {
+            const objectClass = `transition-transform duration-300 group-hover:scale-[1.02] ${
+              sim.fit === 'contain' ? 'object-contain p-2' : 'object-cover'
+            }`;
+            const common = {
+              alt: `${sim.title} simulation preview`,
+              fill: true,
+              unoptimized: true,
+              sizes: '(min-width: 1024px) 32rem, (min-width: 640px) 50vw, 100vw',
+              onError: () => setImgOk(false),
+            };
+            return (
+              <>
+                <Image
+                  {...common}
+                  src={sim.image}
+                  className={`${objectClass} block dark:hidden`}
+                />
+                <Image
+                  {...common}
+                  src={darkVariant(sim.image)}
+                  className={`${objectClass} hidden dark:block`}
+                />
+              </>
+            );
+          })()
         ) : (
           <div className="dotgrid absolute inset-0 flex items-center justify-center opacity-60">
             <span className="rounded-md border hairline bg-bg/70 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-muted">

@@ -39,10 +39,11 @@ shows up as latency, and past a certain point, as devices being declared dead.
 > perfectly.
 
 The trunk in question ran under **EcoStruxure Building Operation**, Schneider
-Electric's building-management platform, and had eight master nodes: an EBO
-automation server, which also routed between this serial segment and the
-building's BACnet/IP side; four room controllers, one per cleanroom; and three
-plant controllers added partway through the project.
+Electric's building-management platform. Seven field devices sat on the segment —
+four room controllers, one per cleanroom, and three RPCs (the air-handler
+controllers) added partway through the project — together with an EBO automation
+server that also routed between this serial segment and the building's BACnet/IP
+side, for eight master nodes in all.
 
 ## 2. How a controller reports a value that changes
 
