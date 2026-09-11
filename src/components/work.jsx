@@ -61,7 +61,7 @@ const featured = [
     },
     figures: {
       href: '/evolutionsim',
-      label: 'Explore the four simulations',
+      label: 'Explore the project',
     },
   },
   {

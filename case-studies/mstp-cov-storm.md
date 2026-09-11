@@ -2,16 +2,16 @@
 title: Tracing pharmacy controller dropouts to one COV number
 date: 2026-09-09
 topic: Controls · Building Automation
-description: Four room controllers in a hospital compounding pharmacy kept dropping off a BACnet MS/TP trunk. The wiring was clean and the network settings were corrected, and it kept happening. Five packet captures later the cause was one configuration property, set to zero, generating four thousand error frames per capture.
+description: Seven controllers shared a hospital compounding pharmacy's BACnet MS/TP trunk, and the four room controllers among them kept dropping off it. The wiring was clean and the network settings were corrected, and it kept happening. Five packet captures later the cause was one configuration property, set to zero, generating four thousand error frames per capture.
 tags: [bacnet, mstp, bas, ecostruxure, packet-capture, cov, troubleshooting]
 ---
 
-*Four room controllers in a hospital compounding pharmacy kept dropping off the
-network. The wiring was clean, the network settings were corrected, and it kept
-happening. Five packet captures later the cause turned out to be one
-configuration property on one point, set to zero. Here is how the token ring
-works, what the captures actually showed, and the two rounds of correct work
-that changed nothing.*
+*Seven controllers shared a hospital compounding pharmacy's BACnet MS/TP trunk,
+and the four room controllers among them kept dropping off the network. The
+wiring was clean, the network settings were corrected, and it kept happening.
+Five packet captures later the cause turned out to be one configuration property
+on one point, set to zero. Here is how the token ring works, what the captures
+actually showed, and the two rounds of correct work that changed nothing.*
 
 ---
 
