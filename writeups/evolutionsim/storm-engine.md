@@ -74,9 +74,11 @@ bottleneck. Parallelizing that solve's red-black smoother across 16 cores cut it
 **1.9×**, and a faster variant that perturbed the result was rejected: a speedup that
 changes the physics isn't a speedup.
 
-Different stages also run at different cadences — dynamics and microphysics every second
-frame, electrification and the lightning path every eighth — because charge structure
-evolves far more slowly than the flow that builds it.
+In the interactive renderer, stages can run at different cadences — dynamics and
+microphysics every second frame, electrification and the lightning path every eighth —
+because charge structure evolves far more slowly than the flow that builds it. The
+research binary behind every result here does not gate: it advances every continuous term
+every step, and computes the breakdown check each step.
 
 ## HOW IT IS CHECKED
 

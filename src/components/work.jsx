@@ -39,20 +39,20 @@ const featured = [
     tagline:
       'A coupled fluid-dynamics, microphysics, and lightning electrification simulator on the GPU.',
     body: [
-      'Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and field-directed bidirectional stepped leaders typed by where each channel terminates, on a unified 5.3M-cell GPU fluid grid.',
-      'Incompressible Navier–Stokes core: Boussinesq buoyancy, Chorin projection, MacCormack semi-Lagrangian advection, Jacobi pressure solve, vorticity confinement. Schemes from Stam (1999), Selle et al. (2008), Fedkiw–Stam–Jensen (2001).',
-      '13K-line Python physics layer drives the GPU, verified numerically against published constants — Heidler return-stroke peak current 29,956 A vs 30,000 A target; breakdown field within 1% per Marshall et al. 1995; gauge invariance and charge conservation verified to floating-point. The broader platform spans ~130 `@compute` entry points across 50 WGSL shader files and 14 foundation physics modules, exposing 371 simulation modes, with a 9,728-test pytest suite.',
+      'Real-time multi-cell thunderstorm engine: 3D moist Navier–Stokes under Boussinesq with virtual-potential-temperature buoyancy, conservative flux-form MPDATA advection, and a geometric-multigrid pressure projection; six-species bulk microphysics with an optional two-moment configuration; Takahashi/Saunders non-inductive graupel–ice charging; and field-directed bidirectional stepped leaders typed by where each channel terminates.',
+      'CPU/GPU hybrid in Rust + wgpu + WGSL, gated kernel-by-kernel against a double-precision Python reference. Runs up to 5.3M cells on a GTX 1660, 5–8× the single-threaded reference at matched resolution.',
+      'The broader platform spans 134 @compute entry points across 54 WGSL shader files and 14 foundation physics modules, exposing 371 simulation modes, with a 10,255-test pytest suite.',
     ],
     metrics: [
-      ['5.3M', 'Cells in the unified GPU fluid grid'],
-      ['~130', '@compute kernels across 50 WGSL files'],
+      ['up to 5.3M', 'GPU cells (largest lifecycle run)'],
+      ['134', '@compute kernels across 54 WGSL files'],
       ['371', 'Simulation modes'],
-      ['<1%', 'Deviation from published constants'],
+      ['5–8×', 'Speedup vs single-thread CPU reference'],
     ],
     stack: [
       'Rust', 'wgpu', 'WGSL', 'Python',
-      'Navier–Stokes', 'Boussinesq', 'MacCormack',
-      'Thompson microphysics', 'Takahashi electrification',
+      'Navier–Stokes', 'Boussinesq', 'MPDATA', 'Multigrid',
+      'Two-moment microphysics', 'Takahashi–Saunders charging',
       'Stepped leaders', 'pytest',
     ],
     private: true,

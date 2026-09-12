@@ -72,7 +72,7 @@ export function Hero() {
           {[
             ['3 mo', 'Lead time on EF1 failure prediction'],
             ['96%', 'BAS historian staleness reduction'],
-            ['2.4M', 'GPU cells in EvolutionSim grid'],
+            ['up to 5.3M', 'GPU cells in EvolutionSim grid'],
             ['2nd', 'VTURCS Symposium 2025'],
           ].map(([stat, label]) => (
             <div key={stat} className="bg-bg p-4">
