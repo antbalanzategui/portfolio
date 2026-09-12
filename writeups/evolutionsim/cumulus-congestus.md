@@ -98,7 +98,7 @@ would have done got the regime running on the engine as it already existed.
 
 ## PHYSICS ENGINE
 
-A CPU/GPU hybrid, Rust + `wgpu` + WGSL, roughly 130 compute entry points across 50
+A CPU/GPU hybrid, Rust + `wgpu` + WGSL, 134 compute entry points across 54
 shader files. Every continuous field runs on the GPU every step:
 
 - Incompressible Navier–Stokes with a geometric-multigrid pressure projection

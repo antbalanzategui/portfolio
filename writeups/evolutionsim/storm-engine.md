@@ -53,7 +53,7 @@ Everything continuous runs on the GPU. One thing does not.
 Stencil computations over structured grids are the archetypal GPU workload — every cell
 does the same arithmetic on its neighbours, which is exactly what wide SIMD hardware is
 built for. Dynamics, microphysics, charge separation and both multigrid solves all live
-there, in Rust + `wgpu` + WGSL across roughly 130 compute entry points in 50 shader
+there, in Rust + `wgpu` + WGSL across 134 compute entry points in 54 shader
 files.
 
 ![The GPU compute pipeline in real WGSL dispatch order, with per-kernel parity ticks and the CPU-leader handoff.](/figs/engine/fig_kernels.png "The GPU compute pipeline in real WGSL dispatch order — per-kernel single-precision parity ticks, per-stage bands, and the hand-off to the CPU leader at the breakdown gate.")
@@ -139,5 +139,5 @@ carries, and they are the difference between a model and a demo.
 
 ---
 
-*Rust + wgpu + WGSL, ~130 compute kernels across 50 shader files, with a
+*Rust + wgpu + WGSL, 134 compute kernels across 54 shader files, with a
 double-precision Python reference oracle. Runs on a GTX 1660.*
