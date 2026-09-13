@@ -1,19 +1,26 @@
 import { getAllPosts } from '@/lib/posts';
 import { getAllCaseStudies } from '@/lib/case-studies';
+import { sims } from '@/lib/sims';
 
 const SITE_URL = 'https://antoniobalanzategui.com';
 
+// Hand-listed routes only. Anything with a content collection behind it
+// (sims, field notes, case studies) is derived below so the sitemap can't
+// drift out of sync with what actually builds.
 const STATIC_ROUTES = [
   { path: '/', priority: 1.0 },
   { path: '/vcu-health', priority: 0.9 },
   { path: '/evolutionsim', priority: 0.9 },
-  { path: '/evolutionsim/blackhole', priority: 0.8 },
-  { path: '/evolutionsim/neutron-star-merger', priority: 0.8 },
-  { path: '/evolutionsim/lightning', priority: 0.7 },
-  { path: '/evolutionsim/snowflake', priority: 0.8 },
   { path: '/case-studies', priority: 0.8 },
   { path: '/field-notes', priority: 0.8 },
 ];
+
+// /evolutionsim/lightning is deliberately absent: it is a noindex client-side
+// redirect to storm-engine, so advertising it would point crawlers at a stub.
+const SIM_ROUTES = sims.map((s) => ({
+  path: `/evolutionsim/${s.slug}`,
+  priority: 0.8,
+}));
 
 function urlEntry({ loc, lastmod, priority }) {
   return [
@@ -30,7 +37,7 @@ function urlEntry({ loc, lastmod, priority }) {
 function buildSitemap(posts, studies) {
   const today = new Date().toISOString().slice(0, 10);
   const entries = [];
-  for (const r of STATIC_ROUTES) {
+  for (const r of [...STATIC_ROUTES, ...SIM_ROUTES]) {
     entries.push(urlEntry({ loc: r.path, lastmod: today, priority: r.priority }));
   }
   for (const p of posts) {
