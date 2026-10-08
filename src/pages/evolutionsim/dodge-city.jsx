@@ -10,10 +10,10 @@ export default function DodgeCity({ bodyHtml }) {
     <SimPage
       slug="dodge-city"
       title="Dodge City"
-      tagline="A weather balloon went up on 26 May 2024. That sounding — and nothing else — went into the engine, and a giant-hail supercell came back out: right depth, right intensity, prolific and correctly-structured lightning. None of it was dialled in."
+      tagline="One weather-balloon sounding went into the engine, and nothing else. A deep, electrified storm came back out — the depth, the updraft and the lightning all emerged from that one profile of the atmosphere. None of it was dialled in."
       image="/figs/kddc/03_flash_constellation.png"
       imageAlt="Every flash of the modeled Dodge City storm in 3D — cloud-to-ground strikes among in-cloud flashes."
-      tags={['Supercell', 'Lightning', 'Real sounding', 'GPU compute', 'WGSL']}
+      tags={['Severe storm', 'Lightning', 'Real sounding', 'GPU compute', 'WGSL']}
       bodyHtml={bodyHtml}
       prev={{ slug: 'cumulus-congestus', title: '← Cumulus Congestus' }}
       next={{ slug: 'chasing-a-dead-lightning-bolt', title: 'Chasing a Dead Lightning Bolt →' }}

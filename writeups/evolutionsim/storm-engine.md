@@ -17,9 +17,10 @@ Five stages, each computing the next, with feedback loops that close the system.
 
 ![The five-stage physics pipeline with governing equations and the feedback loops that close the system.](/figs/engine/fig_schematic_v2.png "The five-stage physics pipeline — governing equations per stage, and the three feedback loops that close the system: latent heat into buoyancy, precipitation and the cold pool into the downdraft, discharge into the field.")
 
-**1 — Environment.** A real radiosonde sounding: temperature, humidity and wind against
+**1 — Environment.** A real radiosonde sounding: temperature and humidity against
 height, measured by an actual weather balloon. CAPE and convective inhibition come out
-of that profile rather than being set. This is the *only* input.
+of that profile rather than being set. This is the *only* input. (The balloon's winds
+are not used yet — see the limitations.)
 
 **2 — Dynamics.** 3D moist Navier–Stokes under the Boussinesq approximation.
 Virtual-potential-temperature buoyancy with CAPE-scaled entrainment, conservative
@@ -89,8 +90,11 @@ slower and it is not the thing you run — it is the thing you check against, ke
 kernel. Each GPU kernel is gated against its double-precision counterpart at roughly
 **1e-6 relative RMS**: single-precision tolerance, the floor 32-bit arithmetic allows.
 
-That number is the point. It means the GPU engine is not a faster *approximation* of the
-physics — it is the same physics, run to the precision the hardware has.
+That number is the point. Kernel by kernel, the GPU engine is not a faster
+*approximation* of the physics — it is the same physics, run to the precision the
+hardware has. The check is per kernel, though: a test of the whole composed step
+passed when it was built, but no longer does, because the reference has since gained a
+moisture-entrainment term the GPU has not been given yet.
 
 The reference is also upstream of the engine it validates: it builds the initial
 condition for every GPU run from the sounding. And it is not frozen — it has received
@@ -101,7 +105,9 @@ Beyond parity, the engine is checked against things it cannot fake:
 
 - **Conservation** — total water closes to machine precision on the double-precision
   reference, ~1e-9 relative on the GPU.
-- **Canonical cases** — Kessler, Weisman–Klemp, and Rotunno–Klemp–Weisman.
+- **Canonical cases** — the Kessler warm-rain column, plus Weisman–Klemp and
+  Rotunno–Klemp–Weisman setups (run with a simple imposed shear, so they exercise the
+  mechanisms rather than reproduce those papers' wind-driven results).
 - **Real soundings** — fourteen of them, spanning CAPE from 0 to 4822 J/kg, reproducing
   the observed continental-versus-maritime updraft contrast.
 - **Capped controls** — soundings with real convective inhibition produce *no storm*.
@@ -119,7 +125,7 @@ consumer card, not a datacentre part.
 The hydrometeor field is written straight into a 3D texture shared with a custom volume
 raymarcher, so a finished run can be rendered live and scrubbed through on a timeline.
 
-## THE HONEST PART
+## LIMITATIONS
 
 - **The pressure solve uses a collocated grid**, which admits odd–even decoupling — the
   classic checkerboard mode. It produces transient grid-scale updraft spikes, bounded by
@@ -129,10 +135,14 @@ raymarcher, so a finished run can be rendered live and scrubbed through on a tim
   some runs the velocity guard is *binding* rather than merely present.
 - **Parity is per-kernel.** Each kernel is gated against the double-precision reference
   individually; that is a stronger statement than most GPU ports make and a weaker one
-  than end-to-end equivalence.
-- **The shear profile is single-direction**, so supercell mesocyclone rotation is not
-  resolved. Agreement with observed storms is one of depth, intensity, precipitation and
-  electrification — not a cell-by-cell radar match.
+  than end-to-end equivalence (the composed-step check currently fails, as above).
+- **There is no environmental wind.** The engine uses the balloon's temperature and
+  moisture but not its winds, and its side walls are closed, so air cannot flow through
+  the box. Storms therefore grow upright, their anvils spread as symmetric caps instead of
+  streaming downwind, and they cannot become supercells (no rotating updraft). Agreement
+  with observed storms is one of depth, intensity and electrification — not storm type,
+  and not a cell-by-cell radar match. Adding the sounding's wind with open boundaries is
+  the next piece of engine work.
 
 None of these are secrets held back from the paper; they are limitations the paper
 carries, and they are the difference between a model and a demo.

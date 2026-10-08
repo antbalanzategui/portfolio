@@ -6,7 +6,7 @@
 
 A real-time GPU simulation of **cumulus congestus** — the towering cumulus that sits
 between a fair-weather sky and a thunderstorm. Same engine that produces 15 km
-electrified supercells, same compiled binary, same core kernels. The only thing that
+electrified thunderstorms, same compiled binary, same core kernels. The only thing that
 changes is the air you feed it.
 
 ## THE SIMULATION, END TO END
@@ -55,10 +55,10 @@ Congestus is the middle rung of three, and the three together are the actual cla
 
 - **Fair-weather cumulus** — tops ~2.2 km, aspect ~1.3, wider than tall.
 - **Towering congestus** — tops ~6.6 km, aspect down to ~0.4, taller than wide.
-- **Deep electrified supercell** — tops ~15 km, full charge structure and lightning.
+- **Deep electrified thunderstorm** — tops ~15 km, full charge structure and lightning.
 
 Humilis to severe, on one engine, separated by nothing but the sounding. An engine
-that only makes supercells isn't an engine — it's an effect.
+that only makes thunderstorms isn't an engine — it's an effect.
 
 ![Updraft efficiency versus CAPE across 11 real soundings.](/figs/congestus/04_regime_map.png "Updraft efficiency versus CAPE across 11 real soundings: maritime storms punch below their fuel — the 'tropical CAPE paradox' — and the engine reproduces it.")
 
@@ -114,7 +114,6 @@ moist convection: buoyancy, condensation, entrainment, and a cap.
 
 ## VERIFICATION, AND WHAT THIS IS NOT
 
-![Cloud-top height across an entrainment sweep.](/figs/congestus/03_entrainment_sweep.png "Cloud-top height across an entrainment sweep — why the modeled heights are honest, and what parameter tuning cannot move.")
 
 The fair-weather sibling of this run **is** validated. Against the double-precision
 reference at matched cloud cover, the GPU field reproduces the statistics that define
@@ -133,7 +132,7 @@ study:
   mid-latitude congestus, correct taller-than-wide morphology, a cap that holds rather
   than running away.
 - It is **not** matched against observations, or against the CPU oracle, the way the
-  deep-storm supercells and the shallow field are.
+  deep-storm cases and the shallow field are.
 - The velocity clamp that bounds the shallow field also caps the congestus updrafts,
   so its peak-updraft magnitude carries **no** quantitative claim.
 

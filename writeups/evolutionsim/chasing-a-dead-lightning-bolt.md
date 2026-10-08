@@ -1,6 +1,6 @@
 # Chasing a dead lightning bolt
 
-*A fast GPU thunderstorm hybrid stopped producing cloud-to-ground lightning. Ruling out the physics first is what found the real bug — a one-line multigrid alias — and then the fix that actually generalized turned out to be the domain geometry, not the pointer.*
+*A fast GPU thunderstorm hybrid stopped producing cloud-to-ground lightning. Ruling out the physics first is what found the real bug — a one-line multigrid alias — and then a second, still-unexplained effect turned up: a wider domain starves the ground strikes on its own.*
 
 ---
 
@@ -14,12 +14,11 @@
 > pointed me at the real cause: a **multigrid array-alias bug** in the flash
 > handler — the ground-seeking leader was re-solving the electric field into an
 > orphaned array, so no bolt could ever reach the ground. A one-line fix took
-> kddc from **IC:CG = ∞ → finite**. Then I made it fast — and learned the real
-> generalizing fix wasn't the pointer at all but the **domain geometry**: the big
-> isotropic box I'd reached for was itself starving CG. Reverting to the default
-> ~20 km box brought **all four heroes to 8–19:1** on the production GPU engine —
-> finite, ordered and physical, though three of the four still sit above the
-> observed range.
+> kddc from **IC:CG = ∞ → finite**. Then I made it fast — and found a second
+> effect: the big isotropic box I'd reached for was *itself* starving CG, for a
+> reason I still haven't pinned down. Reverting to the default ~20 km box brought
+> **all four heroes to 8–19:1** on the production GPU engine — finite, ordered and
+> physical, though three of the four still sit above the observed range.
 
 ## The engine, in one breath
 
@@ -201,27 +200,29 @@ like the tidy ending.*
 
 *It was the wrong ending. Read on.*
 
-## The real fix that generalized: the domain, not just the alias
+## The second effect: a wider box starves CG on its own
 
 Here is the twist I didn't see coming. The alias fix restored CG, but at the big
 runs it was *still* starving — a couple of CGs, then nothing. I'd been treating
-the wide isotropic box as a pure win. It isn't. Widening the box to a big
-**isotropic** ~28 km domain rescales the effective wind shear the storm feels
-across the grid, and that quietly starves cloud-to-ground: the charge structure
-tilts wrong, the ground-seeking leader loses its pull, and CG collapses again. It
-was the same symptom as the alias bug wearing a different mask.
+the wide isotropic box as a pure win. It isn't: widening the domain starves
+cloud-to-ground on its own. A later 48 km Dodge City run made the point harder —
+1,003 in-cloud flashes against 19 ground strikes, about 53:1.
 
-The g160 / 28 km "hero" I'd nearly enshrined as the endpoint (IC:CG ≈ 12:1 in the
-journey figure) was in fact the *broken* config — the very box geometry that
-starves CG. When I reverted to the **default ~20 km box** and let the calibrated
-sounding set the shear it was tuned against, the validated physics came straight
-back. That reversion — not the alias fix alone — is what got **all four** heroes
-producing CG at plausible rates, not just kddc. The alias bug got CG off zero; the
-domain got it *right*.
+I first blamed the wind shear, reasoning that a wider box rescales the shear the
+storm feels across the grid. I checked that later and it is wrong: the engine's
+shear term is applied at physical height and comes out identical in both boxes.
+So the mechanism is still open — and the engine has no real environmental wind to
+rescale in the first place (see [The Storm Engine](/evolutionsim/storm-engine)).
+
+What is not in doubt is the result. The g160 / 28 km "hero" I'd nearly enshrined as
+the endpoint (IC:CG ≈ 12:1 in the journey figure) was the CG-starved configuration.
+Reverting to the **default ~20 km box**, the one the configuration was calibrated in,
+is what got **all four** heroes producing CG at plausible rates, not just kddc. The
+alias bug got CG off zero; staying in the default box kept it there.
 
 So the final answer is not g160 at 28 km. It's **grid128 at the default box**.
 
-## The final validated hero set
+## The final hero set
 
 GPU hybrid, grid 128, default (~20 km) box, dt = 1.0, `k_sep` = 4e-5, two-moment
 microphysics, ~1000 s. All four calibrated real soundings:
@@ -244,16 +245,18 @@ its sounding's tropopause sits at ~17.9 km, too tall for the updraft to reach, s
 the storm never really gets going. Four CG in 1000 s is a marginal storm doing
 marginal-storm things — I'm reporting it, not dressing it up.
 
-## The honest scorecard
+## The scorecard
 
 Against the nine-check capability scorecard, the three vigorous heroes (KDDC,
-KOUN, KJAX) pass **6 of 8** applicable checks. The two they miss are both anvil
-shape:
+KOUN, KJAX) pass **6 of 8** applicable checks. (Its lightning-ratio check uses a
+loose 1–20 band, which is why KDDC and KOUN pass it while sitting above the observed
+1–9 range.) The two they miss are both anvil shape:
 
-- **Anvil downwind streaming** — the engine drives convection with a single
-  scalar wind-shear, not a real hodograph, so it can't stream the anvil downwind
-  the way a veering wind profile would. Fixing this needs a real sounding
-  hodograph, not a knob.
+- **Anvil downwind streaming** — the engine carries no environmental wind at all:
+  it uses the sounding's temperature and moisture but not its winds, and the box
+  walls are closed. So the anvil can't stream downwind the way it does under a real
+  wind profile. Fixing this needs the sounding's winds and open boundaries in the
+  engine, not a knob.
 - **Anvil cap** — the modeled storms overshoot too vertically; the anvil doesn't
   spread and flatten the way an observed one does.
 
@@ -280,7 +283,7 @@ that actually ran the hero set above. The CPU reference keeps exactly one job: t
 double-precision validation oracle that the parity harnesses check against. The fast
 engine does the science; the slow engine proves the fast one didn't lie. That's
 the shape I wanted from the start, and it took chasing a dead bolt all the way
-down to the domain geometry to earn it.
+down to a cached pointer to earn it.
 
 ## What I'd tell the next person
 
@@ -295,7 +298,9 @@ down to the domain geometry to earn it.
   one, it will silently solve into the void. Load in place, or rebuild.
 - **Don't reach for the tuning knob when a bolt won't reach the ground.** It was a
   pointer, not a physics constant.
-- **A "safer" bigger box can break the physics.** Widening to a big isotropic
-  domain rescaled the effective shear and starved CG all over again. The default
-  ~20 km box — the one the soundings were calibrated against — was right the whole
-  time. When a fix seems free, check that it isn't quietly changing an input.
+- **A "safer" bigger box can change the answer.** Widening to a big isotropic
+  domain starved CG all over again, and my first explanation for why (shear
+  rescaling) turned out to be wrong when I measured it. The default ~20 km box —
+  the one the configuration was calibrated in — is what the results use. When a fix
+  seems free, check that it isn't quietly changing the answer, and test your
+  explanation before you write it down.

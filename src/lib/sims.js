@@ -24,13 +24,13 @@ export const sims = [
   {
     slug: 'dodge-city',
     title: 'Dodge City',
-    tagline: 'A 26 May 2024 weather-balloon sounding in, a giant-hail supercell out — depth, intensity and lightning, none of it dialled in.',
+    tagline: 'One weather-balloon sounding in, a deep electrified storm out — depth, updraft and lightning, none of it dialled in.',
     image: '/figs/kddc/03_flash_constellation.png',
   },
   {
     slug: 'chasing-a-dead-lightning-bolt',
     title: 'Chasing a Dead Lightning Bolt',
-    tagline: 'A storm stopped throwing cloud-to-ground lightning. The bug was a one-line multigrid alias; the real fix was the domain geometry.',
+    tagline: 'A storm stopped throwing cloud-to-ground lightning. The bug was a one-line multigrid alias — and a wider box starves the ground strikes too, for reasons still open.',
     image: '/figs/hybrid_cg/fig1_headline_iccg.png',
     fit: 'contain',
   },
