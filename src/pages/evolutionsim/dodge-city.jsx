@@ -15,7 +15,7 @@ export default function DodgeCity({ bodyHtml }) {
       imageAlt="Every flash of the modeled Dodge City storm in 3D — cloud-to-ground strikes among in-cloud flashes."
       tags={['Severe storm', 'Lightning', 'Real sounding', 'GPU compute', 'WGSL']}
       bodyHtml={bodyHtml}
-      prev={{ slug: 'cumulus-congestus', title: '← Cumulus Congestus' }}
+      prev={{ slug: 'storm-engine', title: '← The Storm Engine' }}
       next={{ slug: 'chasing-a-dead-lightning-bolt', title: 'Chasing a Dead Lightning Bolt →' }}
     />
   );

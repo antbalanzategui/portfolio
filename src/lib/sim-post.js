@@ -4,7 +4,7 @@ import { renderPostHtml } from './content';
 
 const POSTS_DIR = path.join(process.cwd(), 'writeups', 'evolutionsim');
 
-// The four storm writeups are house-style markdown: an `# H1`, an italic dek,
+// The storm writeups are house-style markdown: an `# H1`, an italic dek,
 // a `---` rule, then the body. SimPage renders the H1 (title) and dek (tagline)
 // from props, so strip everything up to and including that first rule and render
 // only the body through the figure/KaTeX/mermaid-aware renderer.

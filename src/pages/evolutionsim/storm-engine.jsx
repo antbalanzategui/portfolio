@@ -16,7 +16,7 @@ export default function StormEngine({ bodyHtml }) {
       imageFit="contain"
       tags={['Rust', 'wgpu', 'WGSL', 'Navier–Stokes', 'GPU compute', 'Multigrid']}
       bodyHtml={bodyHtml}
-      next={{ slug: 'cumulus-congestus', title: 'Cumulus Congestus →' }}
+      next={{ slug: 'dodge-city', title: 'Dodge City →' }}
     />
   );
 }

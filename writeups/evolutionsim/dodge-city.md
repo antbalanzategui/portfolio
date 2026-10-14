@@ -38,10 +38,11 @@ Driven by the Dodge City sounding, the engine produced a deep, violent, electrif
 storm:
 
 - **Cloud top ~14.9 km.** A storm that punches to the tropopause.
-- **Peak updraft ~55 m/s.** Strong enough to loft and re-loft growing hailstones. Treat it
+- **Peak updraft ~56 m/s.** Strong enough to loft and re-loft growing hailstones. Treat it
   as a *lower bound* — see below.
-- **24 cloud-to-ground strikes, IC:CG ≈ 14.5.** Roughly fourteen in-cloud flashes for
-  every one that reaches the ground.
+- **~390 flashes in 1000 s, 18 of them cloud-to-ground, IC:CG ≈ 21.** Roughly twenty
+  in-cloud flashes for every one that reaches the ground. These are medians over five
+  runs that differ only in the lightning leader's random wander.
 
 None of those numbers were dialled in. They are what the modeled atmosphere did, and they
 fit a severe-storm air mass: deep enough, with an updraft strong enough and a charge
@@ -52,22 +53,23 @@ Where the hail fell matters for that comparison. The largest stones of the eveni
 Dodge City the reports were 1.0–1.5 inches. So the model is being compared with the
 severity of the air mass, not with one storm over the balloon site.
 
-![The storm in one image — reflectivity, charge structure and lightning.](/figs/kddc/01_hero_kddc.png "The storm in one image: reflectivity, charge and lightning. Cloud top 14.9 km; updraft reads 26 m/s in this instantaneous slice, 55 m/s at the run peak.")
+![The storm in one image — reflectivity, charge structure and lightning.](/figs/kddc/01_hero_kddc.png "The storm in one image: reflectivity, charge and lightning. Cloud top 14.9 km; updraft reads 26 m/s in this instantaneous slice, 55 m/s at the run peak. Rendered from the first engine build, before the surface-pressure correction.")
 
 ![The whole life of the storm in ten moments.](/figs/kddc/02_lifecycle.png "The storm's whole life in ten moments — from first convection to a mature, electrified storm with a mushroom anvil.")
 
-![Radar's-eye view of the cell, regenerated at 128 cubed.](/figs/kddc/04_topdown_reflectivity.png "Radar's-eye view of the cell, regenerated at 128³ from the canonical hero run: 348 in-cloud flashes (IC+CC) and 24 cloud-to-ground — IC:CG ≈ 14.5, the same counts the copy quotes.")
+![Radar's-eye view of the cell, regenerated at 128 cubed.](/figs/kddc/04_topdown_reflectivity.png "Radar's-eye view of the cell, regenerated at 128³ from the first engine build: 348 in-cloud flashes (IC+CC) and 24 cloud-to-ground. The corrected engine's five-run median is 370 and 18.")
 
 ### Where the lightning ratio sits
 
 Observed storms across the US run nearer 1–9 (mean ~3), the high end belonging to
 vigorous high-plains storms. The model sits **above** that range, and there are two
 reasons worth naming: its lower positive charge pocket — the feature that pulls a leader
-down to ground — is weaker than nature's, and 24 ground strikes is a thin sample to build a
-ratio on. The ground strikes themselves are abundant and resolution-robust. It is the
-*ratio* that runs high.
+down to ground — is weaker than nature's, and 18 ground strikes is a thin sample to build a
+ratio on (across five runs it moves between 11 and 21). The ground strikes themselves are
+resolution-robust. It is the *ratio* that runs high, and strengthening that lower charge
+pocket is the engine work now under way.
 
-![Every flash of the storm's life in 3D.](/figs/kddc/03_flash_constellation.png "Every flash of the storm's life in 3D — 24 cloud-to-ground strikes (white) among 348 in-cloud flashes (amber).")
+![Every flash of the storm's life in 3D.](/figs/kddc/03_flash_constellation.png "Every flash of the storm's life in 3D — 24 cloud-to-ground strikes (white) among 348 in-cloud flashes (amber), from the first engine build.")
 
 ![The emergent three-layer charge structure.](/figs/kddc/05_charge_tripole.png "The emergent three-layer charge structure — a tripole the engine was never told to build, recovered from the field the storm made.")
 
@@ -98,11 +100,12 @@ This is a research model, and it gets held to research standards:
   assimilation. The agreement is one of **depth, intensity and electrification** — not a
   cell-by-cell reproduction of the real radar.
 - The peak updraft is limited by grid resolution (the convective "gray zone"), so
-  ~55 m/s is a lower bound — a consistency check against observed *severity*, not a
+  ~56 m/s is a lower bound — a consistency check against observed *severity*, not a
   measured wind.
-- The lightning count carries real run-to-run variance (leader wander is the only
-  stochastic piece), so the stable, quotable number is the **ratio**, not the exact strike
-  tally.
+- The lightning carries real run-to-run variance (leader wander is the only stochastic
+  piece). The total flash count is stable across runs (370–415); the ground-strike tally,
+  and so the ratio, is not (11–21 CG). The numbers above are five-run medians for that
+  reason.
 
 With those limitations stated the headline is narrower and still interesting: a real
 weather-balloon sounding went in, and a deep, prolifically electrified storm of the right

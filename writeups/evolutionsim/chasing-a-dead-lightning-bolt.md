@@ -17,8 +17,9 @@
 > kddc from **IC:CG = ∞ → finite**. Then I made it fast — and found a second
 > effect: the big isotropic box I'd reached for was *itself* starving CG, for a
 > reason I still haven't pinned down. Reverting to the default ~20 km box brought
-> **all four heroes to 8–19:1** on the production GPU engine — finite, ordered and
-> physical, though three of the four still sit above the observed range.
+> **all four heroes to 11–21:1** on the production GPU engine (corrected build, five-run
+> medians). That is finite, ordered and physical, though all four still sit above the
+> observed range.
 
 ## The engine, in one breath
 
@@ -225,24 +226,26 @@ So the final answer is not g160 at 28 km. It's **grid128 at the default box**.
 ## The final hero set
 
 GPU hybrid, grid 128, default (~20 km) box, dt = 1.0, `k_sep` = 4e-5, two-moment
-microphysics, ~1000 s. All four calibrated real soundings:
+microphysics, ~1000 s. All four calibrated real soundings. The numbers are from the
+corrected engine (physical surface pressure, no cap on flashes per lightning step), as
+medians over five runs that differ only in the leader's random wander:
 
 | Hero | Regime | CG | IC:CG | Cloud top | Notes |
 |------|--------|----:|------:|----------:|-------|
-| **KDDC** | continental | 24 | 14.5 | 14.9 km | above the observed range |
-| **KOUN** | continental | 23 | 13.4 | 15.4 km | above the range; top matches the observed ~15.9 km NEXRAD echo top |
-| **KJAX** | maritime | 58 | 8.2 | 17.8 km | most electric, and the only hero inside 1–9:1 |
-| **KLCH** | maritime | 4 | 19.0 | 12.3 km | genuinely weak/marginal, and the thinnest CG sample |
+| **KDDC** | continental | 18 | 20.6 | 14.9 km | above the observed range |
+| **KOUN** | continental | 23 | 17.7 | 15.3 km | above the range; top within ~4% of the observed ~15.9 km NEXRAD echo top |
+| **KJAX** | maritime | 56 | 11.4 | 17.6 km | most electric, and the closest to the observed range |
+| **KLCH** | maritime | 10 | 14.2 | 12.3 km | genuinely weak/marginal, and the thinnest CG sample |
 
-Cloud tops are the total-condensate metric. Only **KJAX sits inside the observed
-1–9:1 range** (Boccippio 2001; Medici 2017); KDDC, KOUN and KLCH all exceed it. Two
-honest reasons rather than one excuse: the modeled lower positive charge centre is
-weaker than nature's, so it under-triggers ground strokes, and 4–58 CG per storm is a
-thin basis for a ratio at all. KOUN is the one I trust
-most as a physical check — its modeled 15.4 km top lands right on the real
-~15.9 km NEXRAD echo top for that day. KLCH is honestly weak, and it *should* be:
+Cloud tops are the total-condensate metric. **All four sit above the observed 1–9:1
+range** (Boccippio 2001; Medici 2017); KJAX comes closest. (In the first engine build
+KJAX landed inside it at 8.2; the corrected engine moved it out.) Two honest reasons
+rather than one excuse: the modeled lower positive charge centre is weaker than
+nature's, so it under-triggers ground strokes, and 10–56 CG per storm is a thin basis
+for a ratio at all. KOUN is the one I trust most as a physical check: its modeled
+15.3 km top lands within about 4% of the real ~15.9 km NEXRAD echo top for that day. KLCH is honestly weak, and it *should* be:
 its sounding's tropopause sits at ~17.9 km, too tall for the updraft to reach, so
-the storm never really gets going. Four CG in 1000 s is a marginal storm doing
+the storm never really gets going. Ten CG in 1000 s is a marginal storm doing
 marginal-storm things — I'm reporting it, not dressing it up.
 
 ## The scorecard

@@ -4,8 +4,9 @@
 // /evolutionsim index renders cards from it and sitemap.xml derives its
 // /evolutionsim/* routes from it. Adding a sim here is enough for both.
 //
-// Not listed: /evolutionsim/lightning, which is a noindex client-side
-// redirect to storm-engine, not a page in its own right.
+// Not listed: /evolutionsim/lightning and /evolutionsim/cumulus-congestus,
+// which are noindex client-side redirects to storm-engine, not pages in their
+// own right.
 export const sims = [
   {
     slug: 'storm-engine',
@@ -13,13 +14,6 @@ export const sims = [
     tagline: 'The storm is not drawn — it is solved. Five-stage moist-convection pipeline, CPU/GPU hybrid, checked against a double-precision oracle.',
     image: '/figs/engine/fig_schematic_v2.png',
     fit: 'contain',
-  },
-  {
-    slug: 'cumulus-congestus',
-    title: 'Cumulus Congestus',
-    tagline: 'Towering cumulus grown from one sounding — the tower, the cap, and the flip to taller-than-wide all emerge.',
-    image: '/figs/congestus/01_congestus_regime.png',
-    video: '/evolutionsim/congestus_showcase.mp4',
   },
   {
     slug: 'dodge-city',
