@@ -66,8 +66,17 @@ vigorous high-plains storms. The model sits **above** that range, and there are 
 reasons worth naming: its lower positive charge pocket — the feature that pulls a leader
 down to ground — is weaker than nature's, and 18 ground strikes is a thin sample to build a
 ratio on (across five runs it moves between 11 and 21). The ground strikes themselves are
-resolution-robust. It is the *ratio* that runs high, and strengthening that lower charge
-pocket is the engine work now under way.
+resolution-robust. It is the *ratio* that runs high.
+
+The obvious suspect was a missing mechanism. Real storms also charge graupel
+*inductively*: the storm's own electric field polarises falling graupel, and cloud
+droplets that bounce off it carry charge away, which builds up that lower positive pocket. The
+engine didn't have it, so I added it. Before running anything I wrote down what
+would count as "it worked", then ran all four paper storms five times each with it
+on. It changed the charge in the cloud, but it did not change the ratio: every storm
+moved by less than 20%, some up and some down. The missing mechanism wasn't the
+answer, and the next suspects are how the main charging rule depends on cloud water
+and how a descending leader decides it has reached the ground.
 
 ![Every flash of the storm's life in 3D.](/figs/kddc/03_flash_constellation.png "Every flash of the storm's life in 3D — 24 cloud-to-ground strikes (white) among 348 in-cloud flashes (amber), from the first engine build.")
 

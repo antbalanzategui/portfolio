@@ -136,6 +136,11 @@ raymarcher, so a finished run can be rendered live and scrubbed through on a tim
 - **Parity is per-kernel.** Each kernel is gated against the double-precision reference
   individually; that is a stronger statement than most GPU ports make and a weaker one
   than end-to-end equivalence (the composed-step check currently fails, as above).
+- **The lightning ratio runs high.** All four real-sounding storms make more in-cloud
+  flashes per ground strike (IC:CG 11–21) than observed storms (1–9). Adding
+  inductive charging, the textbook way storms build the lower positive charge that
+  draws strikes to ground, did not move it (four storms × five runs, tested against
+  pre-registered criteria). It stays in the engine as an opt-in switch.
 - **There is no environmental wind.** The engine uses the balloon's temperature and
   moisture but not its winds, and its side walls are closed, so air cannot flow through
   the box. Storms therefore grow upright, their anvils spread as symmetric caps instead of
