@@ -1,37 +1,23 @@
-import { useEffect } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { SimPage } from '@/components/sim-page';
+import { getStormPostHtml } from '@/lib/sim-post';
 
-// The Cumulus Congestus page is withdrawn. On the corrected engine (physical
-// 101.325 kPa surface pressure) the congestus case no longer reproduces: a
-// pre-registered 12-arm retune found no setting that passed, so the research
-// paper withdrew the result. Keep the URL alive and send it to the engine. The
-// site is a static export, so this is a client-side redirect with a no-JS
-// <meta refresh> fallback.
-const DEST = '/evolutionsim/storm-engine';
+export async function getStaticProps() {
+  return { props: { bodyHtml: getStormPostHtml('cumulus-congestus') || '' } };
+}
 
-export default function CumulusCongestus() {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace(DEST);
-  }, [router]);
-
+export default function CumulusCongestus({ bodyHtml }) {
   return (
-    <>
-      <Head>
-        <title>Redirecting to The Storm Engine…</title>
-        <meta name="robots" content="noindex" />
-        <meta httpEquiv="refresh" content={`0; url=${DEST}`} />
-      </Head>
-      <main className="flex min-h-screen items-center justify-center px-6">
-        <p className="font-mono text-sm text-muted">
-          This page moved to{' '}
-          <a href={DEST} className="text-accent underline">
-            The Storm Engine
-          </a>
-          .
-        </p>
-      </main>
-    </>
+    <SimPage
+      slug="cumulus-congestus"
+      title="Cumulus Congestus"
+      tagline="Towering cumulus grown from a single sounding — the tower, the cap that stops it, and the flip from wider-than-tall to taller-than-wide all emerge from moist convection. Nothing is sculpted."
+      image="/figs/congestus/01_congestus_regime.png"
+      imageAlt="Cumulus congestus tower — cloud tops rising past 6 km with an aspect ratio below one."
+      video="/evolutionsim/congestus_showcase.mp4"
+      tags={['Moist convection', 'LES', 'GPU compute', 'WGSL', 'Verification']}
+      bodyHtml={bodyHtml}
+      prev={{ slug: 'storm-engine', title: '← The Storm Engine' }}
+      next={{ slug: 'dodge-city', title: 'Dodge City →' }}
+    />
   );
 }
