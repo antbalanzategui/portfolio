@@ -472,7 +472,7 @@ rather than exact.*
 
 *Controllability, Not Control: An Analytical Study of a Fan-Coil Sequence.*
 A whitepaper on the dynamics, optimality, and stochastics of a chilled-water
-fan-coil unit (CHoRP FCU_3_447, Andover Continuum b3). This appendix is the
+fan-coil unit (on an Andover Continuum b3 controller). This appendix is the
 compact, theorem-first restatement of the investigation above.
 
 ### Abstract
