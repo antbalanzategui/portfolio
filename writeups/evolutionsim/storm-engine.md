@@ -92,9 +92,18 @@ kernel. Each GPU kernel is gated against its double-precision counterpart at rou
 
 That number is the point. Kernel by kernel, the GPU engine is not a faster
 *approximation* of the physics — it is the same physics, run to the precision the
-hardware has. The check is per kernel, though: a test of the whole composed step
-passed when it was built, but no longer does, because the reference has since gained a
-moisture-entrainment term the GPU has not been given yet.
+hardware has. And not only kernel by kernel: an end-to-end check runs the whole storm
+step (dynamics, microphysics, electrification) on both engines and compares every field.
+It passes at about 1e-5 after one step and stays within its band over 500 steps, in the
+exact configuration the published storms used.
+
+That end-to-end check had been failing for months, and the explanation on record was a
+physics term missing from the GPU. It wasn't. The two sides of the test were being fed
+different surface pressures, and one test binary zeroed a grid-spacing value. Both were
+bugs in the test harness, not the engine. Writing the end-to-end check for the published
+configuration then turned up one real bug, on the *reference* side: its rain and graupel
+fell 2.5× too fast on storm grids. The GPU had been right all along. Thirty-two such gates
+now run with one command.
 
 The reference is also upstream of the engine it validates: it builds the initial
 condition for every GPU run from the sounding. And it is not frozen — it has received
@@ -128,14 +137,15 @@ raymarcher, so a finished run can be rendered live and scrubbed through on a tim
 ## LIMITATIONS
 
 - **The pressure solve uses a collocated grid**, which admits odd–even decoupling — the
-  classic checkerboard mode. It produces transient grid-scale updraft spikes, bounded by
-  a velocity guard. Moving to a staggered arrangement is the known fix and is not done.
-- **Deep storms run in the convective gray zone** (~180–270 m cells), where the updraft
-  is under-resolved by construction. Peak updraft is therefore a guarded quantity, and on
-  some runs the velocity guard is *binding* rather than merely present.
-- **Parity is per-kernel.** Each kernel is gated against the double-precision reference
-  individually; that is a stronger statement than most GPU ports make and a weaker one
-  than end-to-end equivalence (the composed-step check currently fails, as above).
+  classic checkerboard mode. Moving to a staggered arrangement is the known fix and is
+  not done.
+- **The updrafts run too strong.** Deep storms run in the convective gray zone
+  (~180–270 m cells), where the updraft is under-resolved by construction. In the
+  published runs a 60 m/s velocity guard was *binding*. With the guard lifted, the
+  strongest storm peaks at 65 m/s in a smooth updraft core (no instability). That is
+  about 86% of the theoretical parcel limit, where observed storms reach roughly half.
+  A likely cause is that entrained air dilutes the updraft's heat but not its moisture.
+  The fix is built, and its test on the four storms is running.
 - **The lightning ratio runs high.** All four real-sounding storms make more in-cloud
   flashes per ground strike (IC:CG 11–21) than observed storms (1–9). Adding
   inductive charging, the textbook way storms build the lower positive charge that
@@ -146,8 +156,11 @@ raymarcher, so a finished run can be rendered live and scrubbed through on a tim
   the box. Storms therefore grow upright, their anvils spread as symmetric caps instead of
   streaming downwind, and they cannot become supercells (no rotating updraft). Agreement
   with observed storms is one of depth, intensity and electrification — not storm type,
-  and not a cell-by-cell radar match. Adding the sounding's wind with open boundaries is
-  the next piece of engine work.
+  and not a cell-by-cell radar match. The fix is now built and passes its CPU/GPU checks:
+  the balloon's observed wind in a storm-relative frame, side walls that let air flow
+  through, and Coriolis at the station's latitude. The storm runs that will test it (does
+  the anvil stream downwind, does the updraft rotate) are queued, so none of the results
+  on this site use it yet.
 
 None of these are secrets held back from the paper; they are limitations the paper
 carries, and they are the difference between a model and a demo.
