@@ -228,8 +228,7 @@ For our two regimes:
   $T_\text{eq}(0) = \infty > 72.5$ → **fan holdable.** ✓
 - **Heat-sink:** $T_\text{eq}(0) = 67.7\,°F$, the entire controllable band
   $[52.6, 67.7]$ sits *below* the 72.5 trip → **not holdable.** ✗ The critical
-  envelope conductance is $UA^* = Q_\text{load}/(\text{trip} - T_\text{out}) \approx
-  154$ BTU/hr/°F; the scenario's 600 is far past it.
+  envelope conductance is $UA^* = Q_\text{load}/(\text{trip} - T_\text{out}) \approx 154$ BTU/hr/°F; the scenario's 600 is far past it.
 
 The right-hand panel nondimensionalizes the whole thing: with $\beta$ =
 load/coil-capacity and $\gamma$ = envelope-loss/coil-capacity, the green/red boundary
@@ -512,8 +511,7 @@ $$C\,\dot T = Q_\text{load}(T) - Q_\text{cool}(T,u),$$
 $$Q_\text{cool}(T,u) = Q_\text{design}\,a(s)\,f(u)\,\frac{T - T_\text{chws}}{\Delta T_d}, \qquad Q_\text{load}(T) = Q_\text{int} + UA\,(T_\text{out} - T),$$
 
 with valve fraction $u \in [0,1]$ (characteristic $f$, $f(0)=0$, $f' > 0$),
-fan-speed airflow factor $a(s)$, and $\Delta T_d = T_\text{room,design} -
-T_\text{chws}$.
+fan-speed airflow factor $a(s)$, and $\Delta T_d = T_\text{room,design} - T_\text{chws}$.
 
 **Controller.** A hybrid automaton: a discrete supervisor (`UnitControl`) with
 states {Off, Fan-Off, Cooling, More-Cooling, …} and guards on $T$ and a dwell
@@ -653,8 +651,7 @@ while holding the room to ~0.3 °F.
 
 ### A.9 Uncertainty and calibration
 
-The conclusions are structural; the *numbers* depend on $C, Q_\text{int}, UA,
-Q_\text{design}, T_\text{chws}$. Dividing the energy balance by $C$ makes it
+The conclusions are structural; the *numbers* depend on $C, Q_\text{int}, UA, Q_\text{design}, T_\text{chws}$. Dividing the energy balance by $C$ makes it
 **linear in the per-$C$ parameters**, so ordinary least squares on
 $(1,\, T_\text{out} - T,\, -m\,(T - T_\text{chws}))$ — with
 $m = (s/100)(u/100)$ — recovers $Q_\text{int}/C,\, UA/C,\, Q_\text{design}/C$.
@@ -765,8 +762,7 @@ $b\,(e_k - e_{k-1})$. $\quad\blacksquare$
 
 ### Theorem 2 (continuous-fan condition / reachability)
 
-The staging logic cuts the fan when $T < T_\text{trip} := \text{Setp} -
-\text{DiffCooling}$. Define the fixed-valve equilibrium $T_\text{eq}(u)$ by
+The staging logic cuts the fan when $T < T_\text{trip} := \text{Setp} - \text{DiffCooling}$. Define the fixed-valve equilibrium $T_\text{eq}(u)$ by
 $Q_\text{load}(T) = Q_\text{cool}(T, u)$.
 
 **Claim.** Control alone can keep the fan on indefinitely **iff**
@@ -872,11 +868,9 @@ micro-oscillation of amplitude $\le$ the deadband width.
 ### Proposition 5 (Pontryagin optimal control = saturate-then-hold)
 
 Minimize $J = \int_0^{t_f} (T - T^*)^2\,dt$ subject to
-$\dot T = \big(Q_\text{load}(T) - \kappa(T) u\big)/C$, $\kappa(T) =
-Q_\text{design}\,a\,(T - T_\text{chws})/\Delta T_d > 0$, $u \in [0, 1]$.
+$\dot T = \big(Q_\text{load}(T) - \kappa(T) u\big)/C$, $\kappa(T) = Q_\text{design}\,a\,(T - T_\text{chws})/\Delta T_d > 0$, $u \in [0, 1]$.
 
-The Hamiltonian $H = (T - T^*)^2 + \lambda\big(Q_\text{load}(T) -
-\kappa(T) u\big)/C$ is **affine in $u$**, with switching function
+The Hamiltonian $H = (T - T^*)^2 + \lambda\big(Q_\text{load}(T) - \kappa(T) u\big)/C$ is **affine in $u$**, with switching function
 $\sigma = -\lambda \kappa(T)/C$. Thus
 
 $$u^* = \begin{cases} 1, & \lambda > 0 \\ 0, & \lambda < 0 \\ \text{singular}, & \lambda \equiv 0. \end{cases}$$
