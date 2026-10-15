@@ -1,166 +1,112 @@
-%-------------------------------------------------------------------------------
-% Antonio Balanzategui - Resume
-% ATS-friendly single-column LaTeX template.
-% Compile with: pdflatex Antonio_Balanzategui_Resume.tex
-%-------------------------------------------------------------------------------
-\documentclass[11pt,letterpaper]{article}
+%==============================================================================
+% Antonio Balanzategui — Resume
+% Rebuilt as an editable LaTeX source (recreated from Antonio_Balanzategui_Resume_1.pdf).
+% Compile with:  tectonic Antonio_Balanzategui_Resume.tex
+%==============================================================================
+\documentclass[letterpaper,9pt]{extarticle}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[margin=0.55in]{geometry}
+\usepackage{lmodern}
+\usepackage[margin=0.35in]{geometry}
+\addtolength{\textheight}{0.30in}
+\linespread{0.93}
 \usepackage{enumitem}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{xcolor}
-\usepackage{parskip}
 
-% Plain hyperlinks (ATS-safe: no colored boxes around URLs)
-\hypersetup{
-  colorlinks=true,
-  urlcolor=black,
-  linkcolor=black,
-  pdftitle={Antonio Balanzategui - Resume},
-  pdfauthor={Antonio Balanzategui}
-}
-
-% Tight, ATS-friendly section formatting
-\titleformat{\section}
-  {\large\bfseries\MakeUppercase}
-  {}
-  {0pt}
-  {}
-  [\vspace{-2pt}\hrule\vspace{2pt}]
-\titlespacing*{\section}{0pt}{6pt}{2pt}
-
-% Compact itemize for bullets (asterisks render cleanly across ATS)
-\setlist[itemize]{
-  leftmargin=1.2em,
-  itemsep=1pt,
-  parsep=0pt,
-  topsep=2pt,
-  label=$\bullet$
-}
-
+\pagestyle{empty}
 \setlength{\parindent}{0pt}
-\pagenumbering{gobble}
 
-% Subheader macros (job title + employer/period)
-\newcommand{\role}[4]{%
-  \noindent\textbf{#1} \hfill #3 \\[1pt]
-  \textit{#2} \hfill \textit{#4} \\[2pt]
-}
+% --- Section headings: bold, small caps, rule underneath -----------------------
+\titleformat{\section}
+  {\normalsize\bfseries\scshape}
+  {}{0em}{}[\vspace{-0.6ex}\rule{\linewidth}{0.6pt}]
+\titlespacing{\section}{0pt}{1.0ex}{0.5ex}
+
+% --- Bullet list tuned tight ---------------------------------------------------
+\setlist[itemize]{leftmargin=1.4em, topsep=0.2ex, itemsep=0.05ex, parsep=0pt,
+  label=\textbullet}
+
+% --- Helper: an entry with a right-aligned date --------------------------------
+\newcommand{\entry}[2]{%
+  \textbf{#1}\hfill#2\par}
+\newcommand{\subentry}[2]{%
+  \textit{#1}\hfill\textit{#2}\par\vspace{0.2ex}}
 
 \begin{document}
 
-%-------------------------------------------------------------------------------
+%==============================================================================
 % HEADER
-%-------------------------------------------------------------------------------
+%==============================================================================
 \begin{center}
-  {\LARGE \textbf{Antonio Balanzategui}}\\[3pt]
-  Richmond, VA 23235 \textbar{} (804) 332-9563 \textbar{}
-  \href{mailto:antbalanzategui@vt.edu}{antbalanzategui@vt.edu}\\[1pt]
-  \href{https://linkedin.com/in/antbalanzategui}{linkedin.com/in/antbalanzategui} \textbar{}
-  \href{https://github.com/antbalanzategui}{github.com/antbalanzategui} \textbar{}
+  {\LARGE\bfseries Antonio Balanzategui}\\[0.6ex]
+  Richmond, VA 23235 $\vert$ (804) 332-9563 $\vert$ \href{mailto:antbalanzategui@vt.edu}{antbalanzategui@vt.edu}\\[0.3ex]
+  \href{https://linkedin.com/in/antbalanzategui}{linkedin.com/in/antbalanzategui} $\vert$
+  \href{https://github.com/antbalanzategui}{github.com/antbalanzategui} $\vert$
   \href{https://antoniobalanzategui.vercel.app}{antoniobalanzategui.vercel.app}
 \end{center}
 
-%-------------------------------------------------------------------------------
-% HEADLINE (compact 2-line summary; reframes the BAS title)
-%-------------------------------------------------------------------------------
-\vspace{2pt}
-{\small\itshape Software engineer working at the intersection of applied statistics and GPU scientific computing. Production change-point detection and predictive maintenance on industrial sensor data; off-hours building a real-time 2.4M-cell GPU thunderstorm simulator.}
-\vspace{2pt}
-
-%-------------------------------------------------------------------------------
+%==============================================================================
 % EXPERIENCE
-%-------------------------------------------------------------------------------
+%==============================================================================
 \section{Experience}
 
-\role
-  {Building Automation System (BAS) Programmer -- Applied Statistics \& Predictive Maintenance}
-  {Engineered Services, Inc. (contracted to VCU Health)}
-  {Jan 2026 -- Present}
-  {Richmond, VA}
-
+\entry{Project Engineer --- Control Systems Software}{Jan 2026 -- Present}
+\subentry{Engineered Services, Inc. (contracted to VCU Health)}{Richmond, VA}
 \begin{itemize}
   \item Initial February statistical analysis correctly predicted a mechanical change-point from BAS sensor data alone (CUSUM, Mann-Kendall); validated three months later when the EF1 exhaust fan failed catastrophically on March 19, 2026. VCU Health Pharmacy regulatory compliance leadership formally requested quarterly investigations going forward.
-  \item Built and maintain an automated Python pipeline ingesting 10+ months of BAS trend-log data across 12 sensor channels -- CUSUM, Mann-Kendall, MEWMA Hotelling T-squared, PCA, Hawkes self-exciting processes, Kalman (RTS) smoothing, Weibull survival, PELT change-point detection -- generating the full quarterly investigation end-to-end and replacing manual analysis.
-  \item Decoded Schneider EBO/Continuum RTU control programs from XML export, identifying a disabled proportional humidity reset and a hardcoded exhaust-fan loop bypassing the configured PID -- both root causes of ongoing USP 797/800 compliance drift not visible from sensor data alone.
-  \item Diagnosed a BAS historian stale-data cascade (Hawkes branching ratio n* = 0.973, near-critical) affecting all 12 sensor channels; traced it to an ExTL buffer / Maximum Transfer Interval mismatch and implemented a configuration fix that reduced worst-case data staleness from 24 hours to 1 hour (96\% reduction).
-  \item Built a MaintainX-to-Freshdesk ticket migration tool using both vendors' REST APIs, automating a re-keying workflow that previously consumed an estimated week of manual work across a 7-person team for hundreds of tickets.
+  \item Write and revise production sequence-of-operations logic on the hospital's BAS (EcoStruxure Building Operation, Andover Continuum) for RTUs, exhaust fans, pumps, pharmacy cleanrooms, and air-compressor failover.
+  \item Programmed a new burn-ICU expansion's rooftop unit and eight VAV boxes from scratch through startup and test-and-balance: an AS-P state-machine program (lockouts, changeover, freeze/smoke shutdown, dual-fan proof, static-pressure reset, min-OA flow) and native MP-V VAV control with a safety guard. Proved every branch in 14 drills on the live controller; fixed a PID anti-windup defect and wrote a custom XPI block that sets each PID's mode from unit state and control mode so idle loops cannot wind up.
+  \item Diagnose and retune unstable control loops with frequency-domain analysis: modeled a chilled-water pump loop as first-order-plus-dead-time, found the $-180^\circ$ phase crossover, and showed the installed gain left a gain margin below 1 --- a one-line gain change stopped pumps hunting 25--100\% and held $\Delta$P at setpoint in production. In separate self-directed analysis, proved by reachability argument and an MPC benchmark that no controller could hold a fan-coil unit's commanded state, then designed a damped positional PI replacement ($\zeta$ 0.13$\to$0.55, \textasciitilde13$\times$ less valve travel in simulation). Both written up as public case studies.
+  \item Built and maintain an automated Python pipeline over 10+ months of BAS trend-log data across 12 sensor channels --- change-point detection, multivariate SPC, Hawkes processes, Kalman smoothing, Weibull survival --- generating the full quarterly investigation end-to-end and replacing manual analysis.
+  \item Diagnosed a BAS historian stale-data cascade (Hawkes branching ratio n* = 0.973, near-critical) across all 12 channels, tracing it to an ExTL buffer / Maximum Transfer Interval mismatch; the config fix cut worst-case staleness 24 hours $\to$ 1.
+  \item Built two internal tools on the MaintainX and Freshdesk REST APIs: one that migrates service tickets out of MaintainX into Freshdesk, replacing manual re-keying of hundreds of tickets; and one that auto-fills service tickets from Freshdesk time-log entries and routes them to sales. Both in use across the campus.
 \end{itemize}
 
-\role
-  {Undergraduate Teaching Assistant, Introduction to GUI Programming}
-  {Virginia Tech, Department of Computer Science}
-  {Aug 2024 -- May 2025}
-  {Blacksburg, VA}
-
+\vspace{0.6ex}
+\entry{Undergraduate Teaching Assistant, Introduction to GUI Programming}{Aug 2024 -- May 2025}
+\subentry{Virginia Tech, Department of Computer Science}{Blacksburg, VA}
 \begin{itemize}
-  \item Supported 100+ students through object-oriented design, event-driven programming, GUI architecture (layout managers, event listeners, design patterns), and the mathematics underpinning 2D graphics; held weekly office hours and graded projects.
+  \item Taught 100+ students object-oriented design, event-driven programming, GUI architecture, and the mathematics of 2D graphics.
 \end{itemize}
 
-%-------------------------------------------------------------------------------
+%==============================================================================
 % PROJECTS
-%-------------------------------------------------------------------------------
+%==============================================================================
 \section{Projects}
 
-\role
-  {EvolutionSim -- Real-Time Multi-Cell Thunderstorm Simulator}
-  {Personal research project (private repo; demo and code walkthrough available on request)}
-  {2025 -- Present}
-  {}
-
+\entry{EvolutionSim --- Real-Time GPU Thunderstorm \& Lightning Engine}{2025 -- Present}
+\subentry{Personal research project (private repo); 40-page methods \& verification paper and demo available on request}{}
 \begin{itemize}
-  \item Real-time multi-cell thunderstorm simulator coupling 6-species Thompson bulk microphysics, Takahashi non-inductive electrification, and a gauge-invariant Dielectric Breakdown Model (Herrera et al. 2025) on a unified 2.4M-cell GPU fluid grid (Rust + wgpu + WGSL, ~4,600 LoC of compute shaders). Part of a broader ~330K-line platform (Python + Rust) spanning 14 foundation physics modules and 333+ simulation modes.
-  \item Incompressible Navier-Stokes core: Boussinesq buoyancy, Chorin projection, MacCormack semi-Lagrangian advection, Jacobi pressure solve, vorticity confinement; implements schemes from Stam (1999), Selle et al. (2008), and Fedkiw-Stam-Jensen (2001).
-  \item 13K-line Python physics layer (12 modules) drives the GPU; verified numerically against published constants -- Heidler return-stroke peak current 29,956 A vs 30,000 A target, breakdown field within 1\% per Marshall et al. 1995, gauge invariance and charge conservation verified to floating-point. 124K-line pytest suite covers the broader platform.
+  \item Built a real-time GPU storm engine (Rust + wgpu + WGSL, \textasciitilde100 storm compute kernels) simulating deep moist convection coupled to explicit electrification on grids up to 5.3M cells: conservative flux-form (MPDATA) advection, virtual-potential-temperature buoyancy, geometric-multigrid pressure \emph{and} electric-field solvers, two-moment bulk microphysics, and non-inductive graupel--ice charge separation.
+  \item Made the GPU hybrid the production engine for the paper's storm results, with the double-precision CPU implementation kept as a kernel-parity oracle (per-kernel gates at \textasciitilde$10^{-6}$ relative RMS on the gated build, i.e. single-precision tolerance); profiled the flash handler --- the host round-trip I meant to optimize was 1.6\% of per-flash time, the multigrid re-solve 67\% --- then parallelized that solve's red-black smoother across 16 cores for a 1.9$\times$ \emph{bit-identical} speedup, rejecting a faster variant that perturbed the result. 5--8$\times$ the single-threaded reference at matched resolution; four real-sounding storms complete in 6--18 min each in one unattended overnight queue.
+  \item Made lightning emergent rather than scripted: field-directed stepped leaders grow along the resolved electric field, and each flash is typed cloud-to-ground / intracloud / cloud-air by where its channel terminates --- the charge tripole, lightning jump, and multicell self-organization all arise from the physics; flash rates land within 1.38--1.86$\times$ of Price--Rind.
+  \item Checked against observation: total-water conservation to machine precision on the f64 reference ($10^{-9}$\,relative on the GPU); 14 real radiosonde soundings (CAPE 0--4822 J/kg) reproducing the continental-vs-maritime updraft contrast; and two severe-storm soundings --- matching the Norman, OK tornadic storm's NEXRAD echo top to \textasciitilde4\% (15.3 vs \textasciitilde15.9 km), and a Dodge City storm whose depth, intensity and electrification are consistent with the large hail reported in the same air mass; an automated 9-check capability scorecard scores every run from saved output alone, and a six-seed ensemble separates the exactly-deterministic fluid/microphysics solve from the one stochastic component (mean flash rate robust to \textasciitilde4\%). Part of a 371-mode platform with an \textasciitilde10{,}000-test pytest suite.
 \end{itemize}
 
-\role
-  {De Novo Protein Folding Simulation}
-  {CS 4414 (Issues in Scientific Computing), Virginia Tech; team of 4}
-  {Spring 2025}
-  {}
-
-\begin{itemize}
-  \item Predicted the native structure of a 21-residue peptide (Protein T: NLYIQWLKDGGPSSGRPPPS) from sequence alone -- without ML or structural databases -- using four custom simulated-annealing protocols in AMBER (Langevin dynamics, generalized-Born implicit solvent); cyclic MSA-MD produced the lowest-energy conformation at -512.26 kcal/mol. \textbf{Awarded 2nd Place, VTURCS Undergraduate Research Symposium.}
-  \item Benchmarked five optimization methods (Differential Evolution, Simulated Annealing, Nelder-Mead, Newton's, Steepest Descent) on custom 1D/2D folding-funnel test functions; identified stochastic methods as substantially more reliable on rugged energy landscapes.
-\end{itemize}
-
-%-------------------------------------------------------------------------------
+%==============================================================================
 % EDUCATION
-%-------------------------------------------------------------------------------
+%==============================================================================
 \section{Education}
 
-\role
-  {Bachelor of Science, Computer Science}
-  {Virginia Tech, Blacksburg, VA}
-  {May 2025}
-  {}
-
-\vspace{-4pt}
+\entry{Bachelor of Science, Computer Science}{May 2025}
+\subentry{Virginia Tech, Blacksburg, VA}{}
 \begin{itemize}
-  \item GPA: 3.3 \textbar{} Marvin L. and Leila W. Pollard Scholarship.
+  \item GPA: 3.3 $\vert$ Pollard Scholarship $\vert$ 2nd Place, VTURCS Undergraduate Research Symposium --- de novo protein-structure prediction from sequence via simulated annealing in AMBER (Scientific Computing).
 \end{itemize}
 
-%-------------------------------------------------------------------------------
-% SKILLS (expanded — pulls keywords out of the body so ATS sees them)
-%-------------------------------------------------------------------------------
+%==============================================================================
+% SKILLS
+%==============================================================================
 \section{Skills}
 
-\textbf{Programming Languages:} Python, Rust, C++, Java, JavaScript, TypeScript, SQL, C, R, MATLAB; Spanish (proficient).
-
-\textbf{Statistics \& Time Series:} Change-point detection (CUSUM, PELT, Mann-Kendall), multivariate process control (MEWMA Hotelling T-squared), Hawkes self-exciting processes, Kalman/RTS smoothing, Weibull survival analysis, PCA, anomaly detection, statistical modeling.
-
-\textbf{Scientific Computing \& Physics:} Computational fluid dynamics (incompressible Navier-Stokes, Boussinesq buoyancy, Chorin projection, MacCormack advection, Jacobi pressure solve, vorticity confinement), molecular dynamics (AMBER, Langevin dynamics, generalized-Born implicit solvent), microphysics, plasma electrification, numerical optimization (simulated annealing, differential evolution, Nelder-Mead, Newton's method), numerical analysis.
-
-\textbf{GPU \& Graphics:} wgpu, WGSL, compute shaders, GPU-accelerated simulation, real-time rendering.
-
-\textbf{ML \& Data:} NumPy, SciPy, pandas, scikit-learn, Jupyter, data pipelines, feature engineering.
-
-\textbf{Software \& Systems:} pytest, REST API integration, Docker, Linux, Git, PostgreSQL, MongoDB, Node.js, Express, React, LaTeX.
-
-\textbf{Building Automation \& Industrial Control:} Schneider EBO, EcoStruxure, Continuum, BAS trend-log analysis, control loop analysis, industrial sensor data, predictive maintenance.
+\textbf{Languages:} Python, Rust, C++, Java, JavaScript, TypeScript, SQL, C, R, MATLAB; Spanish (proficient).\par\vspace{0.25ex}
+\textbf{GPU \& Graphics:} wgpu, WGSL, compute shaders, GPU-accelerated PDE solvers, CPU$\leftrightarrow$GPU parity validation, volumetric rendering.\par\vspace{0.25ex}
+\textbf{Scientific Computing \& Physics:} Navier-Stokes (Boussinesq, Chorin projection), conservative flux-form advection (MPDATA), geometric multigrid PDE solvers, stencil methods on structured grids, two-moment bulk microphysics, sub-grid turbulence closures (Deardorff), CRM verification (Kessler, Weisman--Klemp), molecular dynamics (AMBER).\par\vspace{0.25ex}
+\textbf{ML, Statistics \& Data:} NumPy, SciPy, pandas, scikit-learn, PyTorch, LightGBM, matplotlib, data pipelines; CUSUM, PELT, Mann-Kendall, MEWMA Hotelling T-squared, Hawkes processes, Kalman/RTS smoothing, Weibull survival, PCA.\par\vspace{0.25ex}
+\textbf{Software \& Systems:} pytest, parity harnesses \& golden-state regression, profiling, REST APIs, Docker, Linux, Git, PostgreSQL, LaTeX.\par\vspace{0.25ex}
+\textbf{Control \& BAS:} PID/PI tuning, frequency-domain stability (gain \& phase margin), dead-time compensation, anti-windup, MPC; EcoStruxure, Andover Continuum, BACnet/IP \& MSTP.
 
 \end{document}

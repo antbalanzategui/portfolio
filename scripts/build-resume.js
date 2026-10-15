@@ -1,3 +1,5 @@
+// RETIRED (2026-10-14): renders the OLD resume. Do not run - it overwrites
+// public/Antonio_Balanzategui_Resume_1.pdf. Current source: resume/Antonio_Balanzategui_Resume.tex (see resume/README.md).
 // Render resume/resume.html to a print-quality PDF via Chromium.
 // Usage: node scripts/build-resume.js
 // Output: public/Antonio_Balanzategui_Resume_1.pdf
